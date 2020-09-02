@@ -15,7 +15,6 @@ public with sharing class CaseMilestoneQueueable extends AbstractQueueable {
   }
 
   public override void work() {
-    System.debug('CaseMilestoneQueueable work');
     this.updateMilestones(cases);
   }
 

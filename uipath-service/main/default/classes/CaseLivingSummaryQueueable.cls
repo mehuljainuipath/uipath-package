@@ -15,7 +15,6 @@ public with sharing class CaseLivingSummaryQueueable extends AbstractQueueable {
   }
 
   public override void work() {
-    System.debug('CaseLivingSummaryQueueable work');
     this.createLivingSummaryHistory(cases, oldCasessMap);
   }
 
@@ -48,9 +47,6 @@ public with sharing class CaseLivingSummaryQueueable extends AbstractQueueable {
         }
       }
       if (!livingSummaryHistoryList.isEmpty()) {
-        System.debug(livingSummaryHistoryList.size());
-        System.debug(livingSummaryHistoryList);
-
         insert livingSummaryHistoryList;
       }
     }

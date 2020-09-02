@@ -14,7 +14,6 @@ public with sharing class CaseFirstResponseQueueable extends AbstractQueueable {
   }
 
   public override void work() {
-    System.debug('CaseFirstResponseQueueable work');
     this.updateMilestones(cases);
   }
 

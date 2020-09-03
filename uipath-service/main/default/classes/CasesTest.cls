@@ -28,6 +28,18 @@ public class CasesTest {
   }
 
   @IsTest
+  private static void testDeriveTotalTimeOnUpdate() {
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+    Case oldCase = new Case(Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
+    insert oldCase;
+    oldCase.Status = 'Closed';
+    update oldCase;
+
+    System.assertEquals(true, oldCase.Total_time_duration__c < 3);
+    System.assertEquals(true, oldCase.Status_Resolved_Time_Stamp__c < system.now());
+  }
+
+  @IsTest
   private static void testDeriveParentEROnInsert() {
     Id parentId = fflib_IDGenerator.generate(Case.SObjectType);
     Id childId = fflib_IDGenerator.generate(Case.SObjectType);

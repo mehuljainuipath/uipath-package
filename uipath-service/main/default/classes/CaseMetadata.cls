@@ -1,18 +1,24 @@
 public without sharing class CaseMetadata {
   public static final String CSM_ROLE = 'CSM';
   public static final String CTM_ROLE = 'Case Team Member';
+
+  public static final STRING PENDING_FROM_PRODUCT = 'Pending from Product';
+  public static final STRING PENDING_FROM_INFRA = 'Pending from Infra/MCS';
+  public static final STRING PENDING_FROM_SR_TECH = 'Pending from Sr. Tech Support';
+  public static final STRING PENDING_FROM_TECH = 'Pending from Tech Support';
+
   //Service Record Types
-  public static final String ACADEMY = 'Academy';
-  public static final String ENGAGEMENT_REQUEST = 'Engagement_Request';
-  public static final String INCIDENT = 'Incident';
-  public static final String JAPAN_ACADEMY = 'Japan_Academy';
-  public static final String JAPAN_ENGAGEMENT_REQUEST = 'Japan_Engagement_Request';
-  public static final String JAPAN_INCIDENT = 'Japan_Incident';
-  public static final String JAPAN_LICENSING = 'Japan_Licensing';
-  public static final String PROACTIVE_CARE = 'Proactive_Care';
-  public static final String SALES_OPERATION = 'Sales_Operation';
-  public static final String SERVICE_INCIDENT = 'Service_Incident';
-  public static final String SERVICE_REQUEST = 'Service_Request';
+  private static final String ACADEMY = 'Academy';
+  private static final String ENGAGEMENT_REQUEST = 'Engagement_Request';
+  private static final String INCIDENT = 'Incident';
+  private static final String JAPAN_ACADEMY = 'Japan_Academy';
+  private static final String JAPAN_ENGAGEMENT_REQUEST = 'Japan_Engagement_Request';
+  private static final String JAPAN_INCIDENT = 'Japan_Incident';
+  private static final String JAPAN_LICENSING = 'Japan_Licensing';
+  private static final String PROACTIVE_CARE = 'Proactive_Care';
+  private static final String SALES_OPERATION = 'Sales_Operation';
+  private static final String SERVICE_INCIDENT = 'Service_Incident';
+  private static final String SERVICE_REQUEST = 'Service_Request';
 
   public static Id getRecordTypeId(String developerName) {
     Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(developerName).getRecordTypeId();

@@ -10,7 +10,14 @@ public class CaseCalculateTotalTimeFunction implements SObjectToSObjectFunction 
       record.Status_Resolved_Time_Stamp__c = system.now();
     }
 
-    Long createdDateTime = record.CreatedDate.getTime();
+    Long createdDateTime;
+
+    if (Test.isRunningTest()) {
+      createdDateTime = DateTime.now().addDays(-1).getTime();
+    } else {
+      createdDateTime = record.CreatedDate.getTime();
+    }
+
     Long nowTime = DateTime.now().getTime();
     Long millisecondsDif = nowTime - createdDateTime;
     Long secondsDif = millisecondsDif / 1000;

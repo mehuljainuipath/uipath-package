@@ -29,22 +29,18 @@ public class CasesTest {
 
   @IsTest
   private static void testDeriveTotalTimeOnUpdate() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
-    Case oldCase = new Case(Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
-    insert oldCase;
+    Case oldCase = new Case(Id = caseId, Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
 
-    Test.setCreatedDate(oldCase.Id, Datetime.now().addDays(-1));
-    Test.startTest();
-    oldCase.Status = 'Closed';
-    update oldCase;
-    Test.stopTest();
+    Case updatedCase = new Case(Id = caseId, Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'Closed');
 
-    Case updatedCase = [
-      SELECT CreatedDate, Total_time_duration__c, Status_Resolved_Time_Stamp__c
-      FROM Case
-      WHERE Id = :oldCase.Id
-      LIMIT 1
-    ];
+    fflib_SObjectDomain.Test.Database.onUpdate(
+      new List<Case>{ updatedCase },
+      new Map<Id, SObject>{ oldCase.Id => oldCase }
+    );
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Total_time_duration__c > 3);
     System.assertEquals(true, updatedCase.Status_Resolved_Time_Stamp__c < system.now());
   }

@@ -24,11 +24,7 @@ public class CaseCalculateTotalTimeFunction implements SObjectToSObjectFunction 
   }
 
   public static void deriveTotalTimeOnUpdate(List<SObject> cases, Map<Id, SObject> existingCases) {
-    SObjectPredicate hasChanged = new HasRecordChanged(
-      new Set<SObjectField>{ Case.Status },
-      cases,
-      existingCases
-    );
+    SObjectPredicate hasChanged = new HasRecordChanged(new Set<SObjectField>{ Case.Status }, cases, existingCases);
 
     Collection.of(cases)
       .filter(hasChanged)

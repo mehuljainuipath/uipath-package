@@ -32,11 +32,21 @@ public class CasesTest {
     Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
     Case oldCase = new Case(Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
     insert oldCase;
+
+    Test.setCreatedDate(oldCase.Id, Datetime.now().addDays(-1));
+    Test.startTest();
     oldCase.Status = 'Closed';
     update oldCase;
+    Test.stopTest();
 
-    System.assertEquals(true, oldCase.Total_time_duration__c < 3);
-    System.assertEquals(true, oldCase.Status_Resolved_Time_Stamp__c < system.now());
+    Case updatedCase = [
+      SELECT CreatedDate, Total_time_duration__c, Status_Resolved_Time_Stamp__c
+      FROM Case
+      WHERE Id = :oldCase.Id
+      LIMIT 1
+    ];
+    System.assertEquals(true, updatedCase.Total_time_duration__c > 3);
+    System.assertEquals(true, updatedCase.Status_Resolved_Time_Stamp__c < system.now());
   }
 
   @IsTest

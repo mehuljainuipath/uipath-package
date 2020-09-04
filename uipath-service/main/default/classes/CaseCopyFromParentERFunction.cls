@@ -67,14 +67,18 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
           .isIn(
             new Set<String>{ CaseMetadata.EngagementRequestRecordType, CaseMetadata.JapanEngagementRequestRecordType }
           )
+      )
+      .mapSome(
+        Match.field(Case.Copy_From_Parent_Case__c)
+          .hasValue()
           .also(Case.Copy_From_Parent_Case__c)
           .equals(true)
           .also(Case.Status)
           .notEquals('Closed')
           .also(Case.ParentId)
-          .hasValue()
-      )
-      .mapAll(new CaseCopyFromParentERFunction(Records));
+          .hasValue(),
+        new CaseCopyFromParentERFunction(Records)
+      );
   }
 
   public static void deriveChildCaseFromParent(List<SObject> Records, Map<Id, SObject> existingRecords) {

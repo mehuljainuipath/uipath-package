@@ -21,6 +21,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnInsert(Records);
     CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records);
+    CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
   }
 
   public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {

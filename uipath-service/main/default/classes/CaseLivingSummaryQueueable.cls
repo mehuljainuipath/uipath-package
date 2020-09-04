@@ -42,7 +42,7 @@ public with sharing class CaseLivingSummaryQueueable extends AbstractQueueable {
             livingSummary.New_Value__c = (String) newCase.get(caseField);
             livingSummary.Old_Value__c = (String) oldCase.get(caseField);
             livingSummaryHistoryList.add(livingSummary);
-            break;
+            //break;
           }
         }
       }

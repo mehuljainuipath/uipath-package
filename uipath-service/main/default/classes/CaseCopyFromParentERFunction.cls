@@ -5,7 +5,7 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
     for (Case record : cases) {
       parentIds.add(record.ParentId);
     }
-    System.debug('### CaseCopyFromParentERFunction ' + cases);
+
     for (Case parentCase : [
       SELECT
         Id,
@@ -26,7 +26,6 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
       FROM Case
       WHERE Id IN :parentIds
     ]) {
-      System.debug('### ---' + parentCase.Id);
       parentCaseMap.put(parentCase.Id, parentCase);
     }
   }
@@ -59,6 +58,23 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
 
   public SObject apply(SObject record) {
     return apply((Case) record);
+  }
+
+  public static void deriveChildCaseFromParent(List<SObject> Records) {
+    Collection.of(Records)
+      .filter(
+        Match.field(Case.RecordTypeId)
+          .isIn(
+            new Set<String>{ CaseMetadata.EngagementRequestRecordType, CaseMetadata.JapanEngagementRequestRecordType }
+          )
+          .also(Case.Copy_From_Parent_Case__c)
+          .equals(true)
+          .also(Case.Status)
+          .notEquals('Closed')
+          .also(Case.ParentId)
+          .hasValue()
+      )
+      .mapAll(new CaseCopyFromParentERFunction(Records));
   }
 
   public static void deriveChildCaseFromParent(List<SObject> Records, Map<Id, SObject> existingRecords) {

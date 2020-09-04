@@ -34,6 +34,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseContactChangeFunction.deriveAccountBasedOnContact(Records, existingRecords);
     CasePendingReasonChangeFunction.derivePendingTimestamps(Records, existingRecords);
     CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records, existingRecords);
+    CaseFirstResponseOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
   }
 
   public override void onAfterInsert() {
@@ -47,6 +48,9 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseTeamMemberQueueable.addDefaultTeamMembers(Records);
     CaseCreateChildCaseQueueable.createChildCases(Records, existingRecords);
     CaseFirstResponseQueueable.setCompletionDateOnMilestones(Records, existingRecords);
+    CaseL2ResoulutionChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
+    CaseStatusChangeOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
+    CaseOwnerChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
   }
 
   public override void onValidate() {

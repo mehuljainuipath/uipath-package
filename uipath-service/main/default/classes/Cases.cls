@@ -31,6 +31,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnUpdate(Records, existingRecords);
     CaseContactChangeFunction.deriveAccountBasedOnContact(Records, existingRecords);
     CasePendingReasonChangeFunction.derivePendingTimestamps(Records, existingRecords);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records, existingRecords);
   }
 
   public override void onAfterInsert() {

@@ -1,8 +1,8 @@
-public with sharing class CaseL2ResoulutionChangeOnERQueueable extends AbstractQueueable {
+public with sharing class CaseL2ResolutionChangeOnERQueueable extends AbstractQueueable {
   private final List<SObject> cases;
 
-  public CaseL2ResoulutionChangeOnERQueueable(List<SObject> cases) {
-    super('CaseL2ResoulutionChangeOnERQueueable');
+  public CaseL2ResolutionChangeOnERQueueable(List<SObject> cases) {
+    super('CaseL2ResolutionChangeOnERQueueable');
     this.cases = cases;
   }
 
@@ -53,7 +53,7 @@ public with sharing class CaseL2ResoulutionChangeOnERQueueable extends AbstractQ
       .asList();
 
     if (!eligibleCases.isEmpty()) {
-      AbstractQueueable.enqueue(new CaseL2ResoulutionChangeOnERQueueable(eligibleCases));
+      AbstractQueueable.enqueue(new CaseL2ResolutionChangeOnERQueueable(eligibleCases));
     }
   }
 }

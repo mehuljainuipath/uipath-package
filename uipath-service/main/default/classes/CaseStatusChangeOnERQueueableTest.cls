@@ -10,7 +10,6 @@ public class CaseStatusChangeOnERQueueableTest {
       Description = 'Parent Case'
     );
     insert parentCase;
-
     Case childCase = new Case(
       ParentId = parentCase.Id,
       Subject = 'Child',
@@ -18,37 +17,30 @@ public class CaseStatusChangeOnERQueueableTest {
       Status = 'New',
       Description = 'Child Case'
     );
-
     insert childCase;
-
-    Case updatedCase = new Case(
-      Id = casesToInsert.get(1).Id,
-      ParentId = casesToInsert.get(0).Id,
-      Subject = 'Test',
-      RecordTypeId = engagementRecordTypeId,
-      Status = 'In Process'
-    );
   }
 
   @isTest
   private static void updateChildNotification_onERStatusChange() {
     Id engagementRecordTypeId = CaseMetadata.EngagementRequestRecordType;
-    Case oldCase = [SELECT Id, Status, ParentId FROM Case WHERE ParentId != null LIMIT 1];
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Case childCase = [
+      SELECT Id, CaseNumber, Sujbect, RecordTypeId, Description, Status, ParentId
+      FROM Case
+      WHERE ParentId != null
+      LIMIT 1
+    ];
+
     Case updatedCase = new Case(
-      Id = oldCase.Id,
-      ParentId = oldCase.ParentId,
+      Id = childCase.Id,
+      ParentId = parentCase.Id,
       Subject = 'Test',
       RecordTypeId = engagementRecordTypeId,
       Status = 'In Process'
     );
 
-    oldCase.ParentId = casesToInsert.get(0).Id;
-
-    fflib_SObjectDomain.Test.Database.onUpdate(
-      new List<Case>{ updatedCase },
-      new Map<Id, SObject>{ updatedCase.Id => oldCase }
-    );
-
-    fflib_SObjectDomain.triggerHandler(Cases.class);
+    new CaseStatusChangeOnERQueueable(new List<Case>{ updatedCase }).execute(null);
+    Case parentCase = [SELECT Id, Status, Child_case_Updates_Notification__c FROM Case WHERE ParentId = null LIMIT 1];
+    System.assertEquals('In Process', parentCase.Status, 'Parent case is updated to In Progress');
   }
 }

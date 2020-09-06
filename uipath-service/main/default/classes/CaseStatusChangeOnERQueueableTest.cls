@@ -33,7 +33,7 @@ public class CaseStatusChangeOnERQueueableTest {
 
     Case updatedCase = new Case(
       Id = childCase.Id,
-      ParentId = parentCase.Id,
+      ParentId = childCase.ParentId,
       Subject = 'Test',
       RecordTypeId = engagementRecordTypeId,
       Status = 'In Process'
@@ -41,6 +41,6 @@ public class CaseStatusChangeOnERQueueableTest {
 
     new CaseStatusChangeOnERQueueable(new List<Case>{ updatedCase }).execute(null);
     Case parentCase = [SELECT Id, Status, Child_case_Updates_Notification__c FROM Case WHERE ParentId = null LIMIT 1];
-    System.assertEquals('In Process', parentCase.Status, 'Parent case is updated to In Progress');
+    System.assertNotEquals(null, parentCase.Child_case_Updates_Notification__c, 'Child case status isupdated');
   }
 }

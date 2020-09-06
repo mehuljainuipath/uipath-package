@@ -25,7 +25,7 @@ public class CaseStatusChangeOnERQueueableTest {
     Id engagementRecordTypeId = CaseMetadata.EngagementRequestRecordType;
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Case childCase = [
-      SELECT Id, CaseNumber, Sujbect, RecordTypeId, Description, Status, ParentId
+      SELECT Id, CaseNumber, Subject, RecordTypeId, Description, Status, ParentId
       FROM Case
       WHERE ParentId != null
       LIMIT 1

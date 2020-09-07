@@ -70,8 +70,6 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
       )
       .mapSome(
         Match.field(Case.Copy_From_Parent_Case__c)
-          .hasValue()
-          .also(Case.Copy_From_Parent_Case__c)
           .equals(true)
           .also(Case.Status)
           .notEquals('Closed')

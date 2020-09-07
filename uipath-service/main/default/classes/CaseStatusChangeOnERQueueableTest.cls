@@ -113,6 +113,6 @@ public class CaseStatusChangeOnERQueueableTest {
 
     new CaseL2ResolutionChangeOnERQueueable(new List<Case>{ updatedCase }).execute(null);
     Case parentCase = [SELECT Id, Status, Child_case_Updates_Notification__c FROM Case WHERE ParentId = null LIMIT 1];
-    System.assertNotEquals(null, parentCase.Child_case_Updates_Notification__c, 'Child Resultion from L2 is updated');
+    System.assertNotEquals(null, parentCase.Child_case_Updates_Notification__c, 'Child Resultion from L2 is changed');
   }
 }

@@ -211,7 +211,6 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>true</enableFeeds>
     <externalSharingModel>Private</externalSharingModel>
-
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
    
     <sharingModel>Read</sharingModel>

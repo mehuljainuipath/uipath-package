@@ -45,7 +45,8 @@ public class CasesTest {
       ParentId = parentId,
       Subject = 'Child',
       RecordTypeId = engagementRecordTypeID,
-      Status = 'New'
+      Status = 'New',
+      Copy_From_Parent_Case__c = true
     );
     fflib_SObjectDomain.Test.Database.onInsert(new List<Case>{ child });
 

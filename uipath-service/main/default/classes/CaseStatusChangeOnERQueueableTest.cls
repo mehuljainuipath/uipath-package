@@ -93,7 +93,7 @@ public class CaseStatusChangeOnERQueueableTest {
   }
 
   @isTest
-  private static void updateChildNotification_onEROwnerChange() {
+  private static void updateChildNotification_onResolutionChange() {
     Id engagementRecordTypeId = CaseMetadata.EngagementRequestRecordType;
     Id userId = fflib_IDGenerator.generate(User.SObjectType);
     Case childCase = [

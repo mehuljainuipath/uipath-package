@@ -28,6 +28,54 @@ public class CasesTest {
   }
 
   @IsTest
+  private static void testDeriveCommValueOnUpdate() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+    Case oldCase = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      RecordTypeId = incidentRecordTypeID,
+      Status = 'New',
+      No_of_Emails_Sent__c = 1
+    );
+    Case updatedCase = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      RecordTypeId = incidentRecordTypeID,
+      Status = 'New',
+      No_of_Emails_Sent__c = 2
+    );
+    fflib_SObjectDomain.Test.Database.onUpdate(
+      new List<Case>{ updatedCase },
+      new Map<Id, SObject>{ oldCase.Id => oldCase }
+    );
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+    System.assertEquals('FR Sent', updatedCase.Comm_Value__c);
+    System.assertEquals('In Process', updatedCase.Status);
+  }
+
+  @IsTest
+  private static void testDeriveCommValueOnInsert() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+
+    Case cs = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      RecordTypeId = incidentRecordTypeID,
+      Status = 'New',
+      No_of_Emails_Sent__c = 2
+    );
+
+    fflib_SObjectDomain.Test.Database.onInsert(new List<Case>{ cs });
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+    System.assertEquals('FR Sent', cs.Comm_Value__c);
+    System.assertEquals('In Process', cs.Status);
+  }
+
+  @IsTest
   private static void testDeriveParentEROnInsert() {
     Id parentId = fflib_IDGenerator.generate(Case.SObjectType);
     Id childId = fflib_IDGenerator.generate(Case.SObjectType);

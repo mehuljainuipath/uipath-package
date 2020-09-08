@@ -1,11 +1,22 @@
 public with sharing class CaseEmailSentFunction implements SObjectToSObjectFunction {
   private Map<Id, Case> parentCaseMap;
-
+  private final Set<String> ORIGIN_EMAIL_SENT;
   public CaseEmailSentFunction(List<Case> cases) {
+    ORIGIN_EMAIL_SENT = new Set<String>();
+    ORIGIN_EMAIL_SENT.add('Web');
+    ORIGIN_EMAIL_SENT.add('Phone');
+    ORIGIN_EMAIL_SENT.add('Select One');
+    ORIGIN_EMAIL_SENT.add('Internally - On behalf of customer');
   }
 
   public SObject apply(Case caseRecord) {
-    caseRecord.No_of_Emails_Sent__c = 1;
+    if (
+      String.isNotBlank(caseRecord.Subject) && caseRecord.Subject.contains('Subject contains Follow Up') ||
+      ORIGIN_EMAIL_SENT.contains(caseRecord.Origin)
+    ) {
+      caseRecord.No_of_Emails_Sent__c = 1;
+    }
+
     return caseRecord;
   }
 
@@ -29,13 +40,9 @@ public with sharing class CaseEmailSentFunction implements SObjectToSObjectFunct
           )
           .also(Case.ContactId)
           .hasValue()
-      )
-      .mapSome(
-        Match.field(Case.Status)
+          .also(Case.Status)
           .equals('New')
-          .also(Case.Origin)
-          .isIn(new Set<String>{ 'Web', 'Phone', 'Select One', 'Internally - On behalf of customer' }),
-        new CaseEmailSentFunction(records)
-      );
+      )
+      .mapAll(new CaseEmailSentFunction(records));
   }
 }

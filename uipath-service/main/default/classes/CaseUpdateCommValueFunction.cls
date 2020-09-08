@@ -6,7 +6,14 @@ public with sharing class CaseUpdateCommValueFunction implements SObjectToSObjec
   }
 
   public SObject apply(Case caseRecord) {
-    caseRecord.Status = 'In Process';
+    if (
+      caseRecord.RecordTypeId == CaseMetadata.AcademyRecordType ||
+      caseRecord.RecordTypeId == CaseMetadata.SalesOperationRecordType
+    ) {
+      caseRecord.Status = 'Customer Action';
+    } else {
+      caseRecord.Status = 'In Process';
+    }
     caseRecord.First_Response_Time_Stamp__c = system.now();
     caseRecord.Comm_Value__c = 'FR Sent';
     return caseRecord;
@@ -31,6 +38,8 @@ public with sharing class CaseUpdateCommValueFunction implements SObjectToSObjec
               CaseMetadata.EngagementRequestRecordType,
               CaseMetadata.JapanEngagementRequestRecordType,
               CaseMetadata.JapanAcademyRecordType,
+              CaseMetadata.AcademyRecordType,
+              CaseMetadata.SalesOperationRecordType,
               CaseMetadata.JapanLicensingRecordType,
               CaseMetadata.JapanIncidentRecordType,
               CaseMetadata.ServiceIncidentRecordType

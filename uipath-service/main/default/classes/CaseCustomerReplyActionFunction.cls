@@ -1,10 +1,18 @@
 public class CaseCustomerReplyActionFunction implements SObjectToSObjectFunction {
-  public CaseCustomerReplyActionFunction(List<Case> cases) {
+  private Map<Id, SObject> existingRecords;
+  public CaseCustomerReplyActionFunction(List<Case> cases, Map<Id, SObject> existingRecords) {
+    this.existingRecords = existingRecords;
   }
 
   public SObject apply(Case record) {
     record.CheckCustomerFirstResponse__c = true;
     record.Status = 'In Process';
+    if (
+      record.RecordTypeId == CaseMetadata.AcademyRecordType ||
+      record.RecordTypeId == CaseMetadata.SalesOperationRecordType
+    ) {
+      record.NoOfReceived_Prior_value__c = ((Case) existingRecords.get(record.Id)).No_of_Emails_Received__c;
+    }
     return record;
   }
 
@@ -37,6 +45,6 @@ public class CaseCustomerReplyActionFunction implements SObjectToSObjectFunction
           .also(Case.No_of_Emails_Received__c)
           .greaterThanOrEquals(1)
       )
-      .mapAll(new CaseCustomerReplyActionFunction(Records));
+      .mapAll(new CaseCustomerReplyActionFunction(Records, existingRecords));
   }
 }

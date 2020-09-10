@@ -169,5 +169,6 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.CheckCustomerFirstResponse__c, 'Customer First Response is set');
     System.assertEquals('In Process', updatedCase.Status, 'Status is changed to In Process');
+    System.assertEquals(0, updatedCase.NoOfReceived_Prior_value__c, 'Prior Value should be zero');
   }
 }

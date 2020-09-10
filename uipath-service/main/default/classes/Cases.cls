@@ -31,6 +31,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseQueueTransferFunction.deriveRelatedTo(Records, existingRecords);
     CaseReOpenEmailCheckboxFunction.deriveCheckboxOnUpdate(Records, existingRecords);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnUpdate(Records, existingRecords);
+    CaseEmailSentFunction.deriveCustomerContact(Records, existingRecords);
   }
 
   public override void onAfterInsert() {

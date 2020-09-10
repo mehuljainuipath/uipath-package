@@ -1,6 +1,3 @@
-/**
- * Sets IsClosed_NotifyOnMail to TRUE after Closed Email is sent.
- */
 public class CaseCustomerReplyActionFunction implements SObjectToSObjectFunction {
   public CaseCustomerReplyActionFunction(List<Case> cases) {
   }

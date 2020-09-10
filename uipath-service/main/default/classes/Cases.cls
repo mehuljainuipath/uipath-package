@@ -18,6 +18,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
   }
 
   public override void onBeforeInsert() {
+    CaseSubjectChangeFunction.deriveSubject(Records);
     CaseProactiveServiceFunction.assignToSupportTechnicalAdvisor(Records);
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnInsert(Records);

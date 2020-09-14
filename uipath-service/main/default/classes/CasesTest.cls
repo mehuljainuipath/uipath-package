@@ -142,4 +142,28 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Milestone_Completed__c);
   }
+
+  @IsTest
+  private static void caseCreateContactFunction_deriveContact() {
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+    Account account = new Account(
+      Name = 'TestAccountUK',
+      Country__c = 'United Kingdom',
+      BillingCountry = 'United Kingdom',
+      Industry = 'Others'
+    );
+    insert account;
+    Case newCase = new Case(
+      AccountId = account.Id,
+      Subject = 'Test',
+      RecordTypeId = incidentRecordTypeID,
+      SuppliedEmail = 'test@test.com',
+      SuppliedName = 'John Doe',
+      Status = 'New'
+    );
+    fflib_SObjectDomain.Test.Database.onInsert(new List<Case>{ newCase });
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+    System.assertNotEquals(null, [SELECT Id FROM Contact WHERE Email = 'test@test.com']);
+  }
 }

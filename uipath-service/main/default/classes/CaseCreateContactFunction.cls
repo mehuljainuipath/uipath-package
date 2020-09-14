@@ -1,6 +1,6 @@
-public with sharing class CaseContactHandler implements SObjectToSObjectFunction {
+public with sharing class CaseCreateContactFunction implements SObjectToSObjectFunction {
   private static Map<String, Contact> emailToContactMap;
-  public CaseContactHandler() {
+  public CaseCreateContactFunction() {
   }
   public SObject apply(Case caseRecord) {
     Contact newContact = emailToContactMap.get(caseRecord.SuppliedEmail);
@@ -67,7 +67,9 @@ public with sharing class CaseContactHandler implements SObjectToSObjectFunction
           : UserInfo.getUserId(),
         AccountId = (newCaseRecord.RecordTypeId == CaseMetadata.AcademyRecordType)
           ? academyAccountId
-          : (accountMap.containsKey(newCaseRecord.AccountId) ? accountMap.get(newCaseRecord.AccountId).Id : dummyAccountId)
+          : (accountMap.containsKey(newCaseRecord.AccountId)
+              ? accountMap.get(newCaseRecord.AccountId).Id
+              : dummyAccountId)
       );
       emailToContactMap.put(newCaseRecord.SuppliedEmail, newContact);
     }
@@ -89,7 +91,7 @@ public with sharing class CaseContactHandler implements SObjectToSObjectFunction
       )
       .asList();
     if (!eligibleCases.isEmpty()) {
-      new CaseContactHandler().createContactUpdateCase(eligibleCases);
+      new CaseCreateContactFunction().createContactUpdateCase(eligibleCases);
     }
   }
 }

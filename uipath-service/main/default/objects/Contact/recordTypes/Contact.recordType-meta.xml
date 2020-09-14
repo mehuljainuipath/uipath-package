@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact</fullName>
+    <active>true</active>
+    <description>Salesforce Contact</description>
+    <label>Contact</label>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Inbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call Outbound</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ChatBot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Content Syndication</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Portal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D%26B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demandbase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EDR Sourced</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event App</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IDG Syndication</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>InboxAI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LinkedIn Sales Navigator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offline%2FOther</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner Portal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spiceworks Syndication</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TechTarget Content Syndication</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TechTarget DiscoverOrg</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TechTarget Priority Engine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webinar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Direct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Email Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Organic Search</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Paid Search</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Referrals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website - Social Media</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ZoomInfo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Name</picklist>
+        <values>
+            <fullName>Dr%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mr%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mrs%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ms%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prof%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

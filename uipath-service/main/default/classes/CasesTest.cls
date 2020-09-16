@@ -101,6 +101,125 @@ public class CasesTest {
     System.assertEquals(true, cs.Milestone_Completed__c);
   }
 
+  /* TODO: to be modified along with the refactor of the function class */
+  @IsTest
+  private static void testDeriveBusinessHoursOnInsert() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+
+    Case Case1 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Urgent',
+      Country__c = 'United States',
+      Related_To__c = 'Orchestrator',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case Case2 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Related_To__c = 'Orchestrator',
+      Time_Zone__c = 'GMT-06:00  Central Standard Time',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case Case3 = new Case(
+      Status = 'New',
+      Steps_Performed__c = 'Step performed',
+      Resolution_Summary__c = 'Step performed',
+      Solution__c = 'Res',
+      Related_To__c = 'Studio',
+      Sub_Component__c = 'Studio_Designer',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-08:00  Pacific Standard Time',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case Case4 = new Case(
+      Status = 'New',
+      suppliedEmail = 'test@test.com',
+      suppliedName = 'Testing name',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-04:00  Atlantic Standard Time',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+    Case Case5 = new Case(
+      Status = 'New',
+      suppliedEmail = 'test@test.com',
+      suppliedName = 'Testing name',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case Case6 = new Case(
+      Status = 'New',
+      suppliedEmail = 'test@test.com',
+      suppliedName = 'Testing name',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case Case7 = new Case(
+      Status = 'New',
+      SuppliedPhone = '123123123',
+      SuppliedEmail = 'test1231234asd@asdawe.com',
+      SuppliedName = 'John Doe',
+      Subject = 'Feedback - Something',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID,
+      Time_Zone__c = null
+    );
+
+    Case Case8 = new Case(
+      Status = 'New',
+      SuppliedPhone = '123123123',
+      SuppliedEmail = 'test1231234asd@asdawe.com',
+      SuppliedName = 'John Doe',
+      Subject = 'Feedback - Something',
+      Priority = 'Medium',
+      Country__c = 'Ecuador',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID,
+      Time_Zone__c = null
+    );
+
+    Case Case9 = new Case(
+      Status = 'New',
+      SuppliedPhone = '123123123',
+      SuppliedEmail = 'test1231234asd@asdawe.com',
+      SuppliedName = 'John Doe',
+      Subject = 'Feedback - Something',
+      Priority = 'Medium',
+      Country__c = 'Ecuador',
+      Milestone_Completed__c = true,
+      RecordTypeId = incidentRecordTypeID,
+      Origin = 'Community',
+      Start_Date__c = System.today().adddays(30)
+    );
+
+    fflib_SObjectDomain.Test.Database.onInsert(
+      new List<Case>{ Case1, Case2, Case3, Case4, Case5, Case6, Case7, Case8, Case9 }
+    );
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+  }
+
   @IsTest
   private static void testSetAutocloseStepsFunction() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);

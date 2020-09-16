@@ -2,11 +2,10 @@
  * TODO: To refactor
  */
 public with sharing class CaseInsertBusinessHoursFunction implements SObjectToSObjectFunction {
-    //Map to Store  Country With Their BusinessHours
-    Map<String, Id> mapOfCounBH = new Map<String, Id>();
+  //Map to Store  Country With Their BusinessHours
+  Map<String, Id> mapOfCounBH = new Map<String, Id>();
 
   public CaseInsertBusinessHoursFunction(List<Case> cases) {
-
     List<BusinessHours> lstOfBH = new List<BusinessHours>([SELECT Id, Name FROM BusinessHours WHERE IsActive = true]);
     System.debug('updateBusinessHours @35' + cases);
 

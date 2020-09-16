@@ -83,6 +83,36 @@ public class CasesTest {
   }
 
   @IsTest
+  private static void testShowErrodOnOpenEROnUpdate() {
+    Id engagementRequestRecordTypeID = CaseMetadata.EngagementRequestRecordType;
+
+    Case parentCase = new Case(Subject = 'Parent', RecordTypeId = engagementRequestRecordTypeID, Status = 'New');
+    insert parentCase;
+
+    Case childCase = new Case(
+      ParentId = parentCase.Id,
+      Subject = 'Child',
+      RecordTypeId = engagementRequestRecordTypeID,
+      Status = 'New'
+    );
+    insert childCase;
+
+    Test.startTest();
+    try {
+      parentCase.Status = 'Closed';
+      update parentCase;
+    } catch (Exception e) {
+      Boolean expectedExceptionThrown = e.getMessage()
+          .contains('There is an Open Engagement Request for this Ticket. Please close the ER first.')
+        ? true
+        : false;
+
+      System.AssertEquals(expectedExceptionThrown, true);
+    }
+    Test.stopTest();
+  }
+
+  @IsTest
   private static void testDeriveMilestoneCompletedOnInsert() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;

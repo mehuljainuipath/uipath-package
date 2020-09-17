@@ -139,7 +139,9 @@ public without sharing class CaseMetadata {
 
   public static Id DefaultBusinessHourId {
     get {
-      DefaultBusinessHourId = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1].Id;
+      if (DefaultBusinessHourId == null) {
+        DefaultBusinessHourId = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1].Id;
+      }
       return DefaultBusinessHourId;
     }
     set;

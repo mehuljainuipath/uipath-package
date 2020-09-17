@@ -142,4 +142,34 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Milestone_Completed__c);
   }
+
+  @IsTest
+  private static void casePendingDurationFunction_derivePendingDuration() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id erRecordTypeId = CaseMetadata.EngagementRequestRecordType;
+    Case oldCase = new Case(Id = caseId, Subject = 'Test', RecordTypeId = erRecordTypeId, Status = 'New');
+    Datetime timeNow = System.now();
+    Case updatedCase = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      RecordTypeId = erRecordTypeId,
+      Status = 'In Process',
+      Pending_Tech_support_time_stamp__c = timeNow.addMinutes(-60),
+      Pending_Sr_Tech_Support_time_stamp__c = timeNow.addMinutes(-50),
+      Pending_Infra_MCS_Time_stamp__c = timeNow.addMinutes(-40),
+      Pending_Product_Timestamp__c = timeNow.addMinutes(-30)
+    );
+    for (String picklistValue : CaseMetadata.AwaitingPendingReasons) {
+      oldCase.Awaiting_Pending_Reason__c = picklistValue;
+      fflib_SObjectDomain.Test.Database.onUpdate(
+        new List<Case>{ updatedCase },
+        new Map<Id, SObject>{ oldCase.Id => oldCase }
+      );
+
+      fflib_SObjectDomain.triggerHandler(Cases.class);
+    }
+    System.assertNotEquals(null, updatedCase.Duration_in_Pending_Tech_support__c, 'Duration is not updated');
+    System.assertNotEquals(null, updatedCase.Duration_Pending_Sr_Tech_Support__c, 'Duration is not updated');
+    System.assertNotEquals(null, updatedCase.Duration_in_Pending_Infra_MCS_support__c, 'Duration is not updated');
+  }
 }

@@ -121,4 +121,27 @@ public without sharing class CaseMetadata {
     }
     set;
   }
+
+  public static List<String> AwaitingPendingReasons {
+    get {
+      if (AwaitingPendingReasons == null) {
+        AwaitingPendingReasons = new List<String>();
+        Schema.DescribeFieldResult fieldResult = Case.Awaiting_Pending_Reason__c.getDescribe();
+        List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+        for (Schema.PicklistEntry pickListVal : ple) {
+          AwaitingPendingReasons.add(pickListVal.getValue());
+        }
+      }
+      return AwaitingPendingReasons;
+    }
+    set;
+  }
+
+  public static Id DefaultBusinessHourId {
+    get {
+      DefaultBusinessHourId = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1].Id;
+      return DefaultBusinessHourId;
+    }
+    set;
+  }
 }

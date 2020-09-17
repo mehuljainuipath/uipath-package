@@ -103,6 +103,196 @@ public class CasesTest {
 
   /* TODO: to be modified along with the refactor of the function class */
   @IsTest
+  private static void testDeriveBusinessHoursOnUpdate() {
+    Id caseId0 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId1 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId2 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId3 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId4 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId5 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId6 = fflib_IDGenerator.generate(Case.SObjectType);
+    Id caseId7 = fflib_IDGenerator.generate(Case.SObjectType);
+
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+    Id proactiveRecordTypeID = CaseMetadata.ProactiveCareRecordType;
+    Id japanEngagementRecordTypeID = CaseMetadata.JapanEngagementRequestRecordType;
+
+    Case oldCase0 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case oldCase1 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-08:00  Pacific Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case oldCase2 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case oldCase3 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case oldCase4 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case oldCase5 = new Case(
+      Status = 'New',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      RecordTypeId = incidentRecordTypeID,
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      Origin = 'Community',
+      Start_Date__c = System.today().adddays(30)
+    );
+
+    Case oldCase6 = new Case(
+      Status = 'New',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      RecordTypeId = proactiveRecordTypeID,
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      ORigin = null
+    );
+
+    Case oldCase7 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      RecordTypeId = incidentRecordTypeID,
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      Start_Date__c = System.today().adddays(30)
+    );
+
+    Case updatedCase0 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Urgent',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case updatedCase1 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case updatedCase2 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-06:00  Central Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case updatedCase3 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-08:00  Pacific Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case updatedCase4 = new Case(
+      Status = 'New',
+      Origin = 'Web',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      Time_Zone__c = 'GMT-04:00  Atlantic Standard Time',
+      RecordTypeId = incidentRecordTypeID
+    );
+
+    Case updatedCase5 = new Case(
+      Status = 'New',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      RecordTypeId = incidentRecordTypeID,
+      Time_Zone__c = '',
+      Origin = 'Community',
+      Start_Date__c = System.today().adddays(30)
+    );
+
+    Case updatedCase6 = new Case(
+      Status = 'New',
+      Priority = 'Medium',
+      Country__c = 'Ecuador',
+      RecordTypeId = proactiveRecordTypeID,
+      Time_Zone__c = '',
+      ORigin = null
+    );
+
+    Case updatedCase7 = new Case(
+      Status = 'New',
+      Origin = 'Community',
+      Priority = 'Medium',
+      Country__c = 'United States',
+      RecordTypeId = japanEngagementRecordTypeID,
+      Time_Zone__c = 'GMT-05:00  Eastern Standard Time',
+      Start_Date__c = System.today().adddays(30)
+    );
+
+    fflib_SObjectDomain.Test.Database.onUpdate(
+      new List<Case>{
+        updatedCase0,
+        updatedCase1,
+        updatedCase2,
+        updatedCase3,
+        updatedCase4,
+        updatedCase5,
+        updatedCase6,
+        updatedCase7
+      },
+      new Map<Id, SObject>{
+        oldCase0.Id => oldCase0,
+        oldCase1.Id => oldCase1,
+        oldCase2.Id => oldCase2,
+        oldCase3.Id => oldCase3,
+        oldCase4.Id => oldCase4,
+        oldCase5.Id => oldCase5,
+        oldCase6.Id => oldCase6,
+        oldCase7.Id => oldCase7
+      }
+    );
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+  }
+
+  /* TODO: to be modified along with the refactor of the function class */
+  @IsTest
   private static void testDeriveBusinessHoursOnInsert() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;

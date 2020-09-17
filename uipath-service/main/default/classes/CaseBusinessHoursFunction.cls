@@ -1,11 +1,11 @@
 /**
  * TODO: To refactor
  */
-public with sharing class CaseInsertBusinessHoursFunction implements SObjectToSObjectFunction {
+public with sharing class CaseBusinessHoursFunction implements SObjectToSObjectFunction {
   //Map to Store  Country With Their BusinessHours
   Map<String, Id> mapOfCounBH = new Map<String, Id>();
 
-  public CaseInsertBusinessHoursFunction(List<Case> cases) {
+  public CaseBusinessHoursFunction(List<Case> cases) {
     List<BusinessHours> lstOfBH = new List<BusinessHours>([SELECT Id, Name FROM BusinessHours WHERE IsActive = true]);
     System.debug('updateBusinessHours @35' + cases);
 
@@ -63,6 +63,16 @@ public with sharing class CaseInsertBusinessHoursFunction implements SObjectToSO
   }
 
   public static void deriveBusinessHoursOnInsert(List<Case> records) {
-    Collection.of(records).mapSome(Match.field(Case.Priority).hasValue(), new CaseInsertBusinessHoursFunction(records));
+    Collection.of(records).mapSome(Match.field(Case.Priority).hasValue(), new CaseBusinessHoursFunction(records));
+  }
+
+  public static void deriveBusinessHoursOnUpdate(List<SObject> cases, Map<Id, SObject> existingCases) {
+    SObjectPredicate hasChanged = new HasRecordChanged(
+      new Set<SObjectField>{ Case.Country__c, Case.Priority, Case.Time_Zone__c },
+      cases,
+      existingCases
+    );
+
+    Collection.of(cases).filter(hasChanged).mapAll(new CaseBusinessHoursFunction(cases));
   }
 }

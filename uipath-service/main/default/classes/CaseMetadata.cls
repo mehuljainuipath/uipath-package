@@ -121,4 +121,14 @@ public without sharing class CaseMetadata {
     }
     set;
   }
+
+  public static Id DefaultBusinessHourId {
+    get {
+      if (DefaultBusinessHourId == null) {
+        DefaultBusinessHourId = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1].Id;
+      }
+      return DefaultBusinessHourId;
+    }
+    set;
+  }
 }

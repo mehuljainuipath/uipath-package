@@ -142,4 +142,43 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Milestone_Completed__c);
   }
+
+  @IsTest
+  private static void caseStatusDurationFunction_deriveStatusDuration() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id erRecordTypeId = CaseMetadata.EngagementRequestRecordType;
+    Case oldCase = new Case(Id = caseId, Subject = 'Test', RecordTypeId = erRecordTypeId, Status = 'New');
+    Datetime timeNow = System.now();
+    Case updatedCase = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      RecordTypeId = erRecordTypeId,
+      Status = 'New',
+      Start_When_New__c = timeNow.addMinutes(-50),
+      Status_In_Process_Time_Stamp__c = timeNow.addMinutes(-40),
+      Status_Customer_Action_Time_Stamp__c = timeNow.addMinutes(-30),
+      Status_Pending_Engineering_Time_Stamp__c = timeNow.addMinutes(-20),
+      Status_Resolved_Time_Stamp__c = timeNow.addMinutes(-10)
+    );
+    for (
+      String picklistValue : new List<String>{
+        'New',
+        'In Process',
+        'Customer Action',
+        'Pending From Engineering',
+        'Resolved',
+        'Closed'
+      }
+    ) {
+      oldCase.Status = picklistValue;
+      fflib_SObjectDomain.Test.Database.onUpdate(
+        new List<Case>{ updatedCase },
+        new Map<Id, SObject>{ oldCase.Id => oldCase }
+      );
+
+      fflib_SObjectDomain.triggerHandler(Cases.class);
+    }
+    System.assertNotEquals(null, updatedCase.Total_Case_In_Process_Duration__c, 'Duration is not updated');
+    System.assertNotEquals(null, updatedCase.Total_Case_Resolved_Duration__c, 'Duration is not updated');
+  }
 }

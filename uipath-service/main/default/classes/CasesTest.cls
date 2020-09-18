@@ -147,7 +147,7 @@ public class CasesTest {
   private static void testCaseMergedCaseOperationsOnUpdate() {
     Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
 
-    Case cs = new Case(Id = caseId, Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
+    Case cs = new Case(Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
     insert cs;
 
     cs.Status = 'Resolved';

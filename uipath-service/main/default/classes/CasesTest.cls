@@ -151,7 +151,7 @@ public class CasesTest {
     insert cs;
 
     Test.startTest();
-    cs.Status = 'Resolved';
+    cs.Status = system.label.MergedCaseStatus;
     cs.Closure_Classification__c = 'Enhancement Request';
     cs.Resolution_Summary__c = 'test';
     cs.Solution__c = 'test';

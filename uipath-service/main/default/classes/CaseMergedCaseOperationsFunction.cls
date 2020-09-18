@@ -66,21 +66,22 @@ public with sharing class CaseMergedCaseOperationsFunction implements SObjectToS
       EmailTemplate templateId = [SELECT id, subject, htmlvalue FROM EmailTemplate WHERE name = :mergedTemplateName];
       List<Messaging.SingleEmailMessage> allmsg = new List<Messaging.SingleEmailMessage>();
 
-      for (Id caseObjId : caseWithCaseCommentMap.keyset()) {
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+      if (owa != null && templateId != null) {
+        for (Id caseObjId : caseWithCaseCommentMap.keyset()) {
+          Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
 
-        mail.setTemplateID(templateId.Id);
-        mail.setSaveAsActivity(false);
+          mail.setTemplateID(templateId.Id);
+          mail.setSaveAsActivity(false);
 
-        mail.setWhatId(caseObjId); // This is the record I
-        mail.setTargetObjectId(caseWithCaseCommentMap.get(caseObjId).contactId);
-        mail.setOrgWideEmailAddressId(owa.id);
-        allmsg.add(mail);
+          mail.setWhatId(caseObjId); // This is the record I
+          mail.setTargetObjectId(caseWithCaseCommentMap.get(caseObjId).contactId);
+          mail.setOrgWideEmailAddressId(owa.id);
+          allmsg.add(mail);
+        }
       }
 
       Messaging.sendEmail(allmsg, false);
     } catch (Exception e) {
-      throw new IllegalArgumentException(e.getMessage());
     }
   }
 

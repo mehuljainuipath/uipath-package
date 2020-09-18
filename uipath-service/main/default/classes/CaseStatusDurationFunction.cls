@@ -75,7 +75,7 @@ public with sharing class CaseStatusDurationFunction implements SObjectToSObject
     Datetime dateTimeNow = DateTime.now();
     Id businessHourId = CaseMetadata.DefaultBusinessHourId;
     duration = (duration != null) ? duration : 0;
-    if (fromTimestamp <> dateTimeNow) {
+    if (fromTimestamp != null && fromTimestamp != dateTimeNow) {
       Decimal durationinMins = (Decimal) BusinessHours.diff(businessHourId, fromTimestamp, dateTimeNow) / 60000;
       duration = durationinMins + duration;
     }

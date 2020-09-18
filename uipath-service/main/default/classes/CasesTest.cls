@@ -142,4 +142,25 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Milestone_Completed__c);
   }
+
+  @IsTest
+  private static void testCaseMergedCaseOperationsOnUpdate() {
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+
+    Case cs = new Case(Id = caseId, Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
+    insert cs;
+
+    cs.Status = 'Resolved';
+    cs.Closure_Classification__c = 'Enhancement Request';
+    cs.Resolution_Summary__c = 'test';
+    cs.Solution__c = 'test';
+    cs.Related_To__c = 'Studio';
+    cs.Sub_Component__c = 'Studio_uninstallation';
+    update cs;
+
+    caseComment casecomm = new CaseComment(CommentBody = 'has been merged with Case', ParentId = cs.Id);
+    insert casecomm;
+
+    CaseMergedCaseOperationsFunction.mergeCaseFutureHandler(new Set<Id>{cs.Id});
+  }
 }

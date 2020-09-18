@@ -85,7 +85,6 @@ public with sharing class CaseMergedCaseOperationsFunction implements SObjectToS
   }
 
   public static void deriveMergedCaseOperationsOnUpdate(List<SObject> cases, Map<Id, SObject> existingCases) {
-
     Collection.of(cases).mapAll(new CaseMergedCaseOperationsFunction(cases));
   }
 }

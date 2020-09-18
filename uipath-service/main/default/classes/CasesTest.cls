@@ -150,6 +150,7 @@ public class CasesTest {
     Case cs = new Case(Subject = 'Test', RecordTypeId = incidentRecordTypeID, Status = 'New');
     insert cs;
 
+    Test.startTest();
     cs.Status = 'Resolved';
     cs.Closure_Classification__c = 'Enhancement Request';
     cs.Resolution_Summary__c = 'test';
@@ -161,6 +162,7 @@ public class CasesTest {
     caseComment casecomm = new CaseComment(CommentBody = 'has been merged with Case', ParentId = cs.Id);
     insert casecomm;
 
-    CaseMergedCaseOperationsFunction.mergeCaseFutureHandler(new Set<Id>{cs.Id});
+    CaseMergedCaseOperationsFunction.mergeCaseFutureHandler(new Set<Id>{ cs.Id });
+    Test.stopTest();
   }
 }

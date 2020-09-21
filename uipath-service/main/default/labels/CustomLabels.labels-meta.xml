@@ -1,10 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>AcademyEntitlementName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AcademyEntitlementName</shortDescription>
+        <value>Academy</value>
+    </labels>
+    <labels>
         <fullName>Communication_Milestone_Name</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Communication Milestone Name</shortDescription>
         <value>Communication Updates</value>
+    </labels>
+    <labels>
+        <fullName>Enterprise_Account_Entitlement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enterprise Account Entitlement</shortDescription>
+        <value>Enterprise Account</value>
+    </labels>
+    <labels>
+        <fullName>JapanEnterpriseEntitlementName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>JapanEnterpriseEntitlementName</shortDescription>
+        <value>Japan Enterprise Account</value>
+    </labels>
+    <labels>
+        <fullName>JapanPremiumEntitlementName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>JapanPremiumEntitlementName</shortDescription>
+        <value>Japan Premium Account</value>
+    </labels>
+    <labels>
+        <fullName>JapanStandardEntitlementName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>JapanStandardEntitlementName</shortDescription>
+        <value>Japan Standard Account</value>
+    </labels>
+    <labels>
+        <fullName>PremiumPlus_Account_Entitlement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PremiumPlus Account Entitlement</shortDescription>
+        <value>PremiumPlus Account</value>
+    </labels>
+    <labels>
+        <fullName>Premium_Account_Entitlement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Premium Account Entitlement</shortDescription>
+        <value>Premium Account</value>
+    </labels>
+    <labels>
+        <fullName>SalesOperationEntitlementName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Operation Entitlement Name</shortDescription>
+        <value>Sales Operation</value>
+    </labels>
+    <labels>
+        <fullName>Standard_Account_Entitlement</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Standard Account Entitlement</shortDescription>
+        <value>Standard Account</value>
     </labels>
 </CustomLabels>

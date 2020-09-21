@@ -1,6 +1,17 @@
 public without sharing class CaseMetadata {
   public static final String CSM_ROLE = 'CSM';
   public static final String CTM_ROLE = 'Case Team Member';
+  public static final Set<String> ENTITLEMENT_NAMES = new Set<String>{
+    Label.Premium_Account_Entitlement,
+    Label.PremiumPlus_Account_Entitlement,
+    Label.Standard_Account_Entitlement,
+    Label.Enterprise_Account_Entitlement,
+    Label.SalesOperationEntitlementName,
+    Label.AcademyEntitlementName,
+    Label.JapanStandardEntitlementName,
+    Label.JapanEnterpriseEntitlementName,
+    Label.JapanPremiumEntitlementName
+  };
 
   public static Id getRecordTypeId(String developerName) {
     Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(developerName).getRecordTypeId();
@@ -118,6 +129,19 @@ public without sharing class CaseMetadata {
         FieldToRoleMap.put(Case.Account_STA__c, CTM_ROLE);
       }
       return FieldToRoleMap;
+    }
+    set;
+  }
+
+  public static Map<String, Id> EntitlementMap {
+    get {
+      if (EntitlementMap == null) {
+        EntitlementMap = new Map<String, Id>();
+        for (Entitlement entitlement : [SELECT Id, Name FROM Entitlement WHERE Name IN :ENTITLEMENT_NAMES LIMIT 100]) {
+          EntitlementMap.put(entitlement.Name, entitlement.Id);
+        }
+      }
+      return EntitlementMap;
     }
     set;
   }

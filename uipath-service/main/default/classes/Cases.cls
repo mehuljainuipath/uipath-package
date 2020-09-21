@@ -21,6 +21,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnInsert(Records);
     CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
+    CasePopulateEntitlementFunction.deriveEntityBasedOnAccountType(Records);
   }
 
   public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {
@@ -30,6 +31,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseQueueTransferFunction.deriveRelatedTo(Records, existingRecords);
     CaseReOpenEmailCheckboxFunction.deriveCheckboxOnUpdate(Records, existingRecords);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnUpdate(Records, existingRecords);
+    CasePopulateEntitlementFunction.deriveEntityBasedOnAccountType(Records, existingRecords);
   }
 
   public override void onAfterInsert() {

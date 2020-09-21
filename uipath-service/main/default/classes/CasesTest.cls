@@ -142,4 +142,17 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(true, updatedCase.Milestone_Completed__c);
   }
+
+  @IsTest
+  /* TODO: Refactor with the Function Class*/
+  public static void testDeriveFetchUserTZForBusinessHourOnInsert() {
+    Case cs = new Case(
+      Subject = 'Test',
+      RecordTypeId = CaseMetadata.IncidentRecordType,
+      Status = 'New',
+      Origin = 'Email',
+      Time_Zone__c = 'GMT-08:00  Pacific Standard Time'
+    );
+    insert cs;
+  }
 }

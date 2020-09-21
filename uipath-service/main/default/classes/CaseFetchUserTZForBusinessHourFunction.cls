@@ -1,7 +1,7 @@
 /**
  * TODO: To refactor
  */
-public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction implements SObjectToSObjectFunction {
+public with sharing class CaseFetchUserTZForBusinessHourFunction implements SObjectToSObjectFunction {
   Set<Id> ownerIdSet = new Set<Id>();
   Set<Id> bsnsHrIdSet = new Set<Id>();
   Set<Id> caseownerIdSet = new Set<Id>();
@@ -12,8 +12,10 @@ public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction impl
   List<Case> caseToUpdateList = new List<Case>();
   Map<Id, BusinessHours> orgBusnssHrsMap;
   Map<Id, Case> caseWithBusnssHrMap;
+  BusinessHours IncidentDefaultBusinessHours = new BusinessHours();
+  Map<String, BusinessHours> mapOfNametoBusinessHours = new Map<String, BusinessHours>();
 
-  public CaseFetchUserTimeZoneToUpdateBusinessHourFunction(List<Case> cases) {
+  public CaseFetchUserTZForBusinessHourFunction(List<Case> cases) {
     caseWithBusnssHrMap = new Map<Id, Case>(
       [
         SELECT Id, BusinessHoursId, BusinessHours.TimeZoneSidKey, Owner.Type, OwnerId, RecordtypeId
@@ -22,8 +24,6 @@ public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction impl
       ]
     );
 
-    BusinessHours IncidentDefaultBusinessHours = new BusinessHours();
-    Map<String, BusinessHours> mapOfNametoBusinessHours = new Map<String, BusinessHours>();
     for (BusinessHours it : [
       SELECT Id, NAme, TimeZoneSidKey
       FROM BusinessHours
@@ -40,7 +40,7 @@ public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction impl
 
   public SObject apply(Case eachCase) {
     if (!mapOfNametoBusinessHours.isEmpty()) {
-      if (eachCase.time_zone__c != null && mapOfNametoBusinessHours.get(eachCase.Time_Zone__c) != null) {
+      if (eachCase.Time_Zone__c != null && mapOfNametoBusinessHours.get(eachCase.Time_Zone__c) != null) {
         eachCase.BusinessHoursId = mapOfNametoBusinessHours.get(eachCase.Time_Zone__c).Id;
       }
     }
@@ -51,7 +51,7 @@ public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction impl
     return apply((Case) record);
   }
 
-  public static void deriveFetchUserTimeZoneToUpdateBusinessHourOnInsert(List<SObject> cases) {
+  public static void deriveFetchUserTZForBusinessHourOnInsert(List<SObject> cases) {
     Collection.of(cases)
       .mapSome(
         Match.field(Case.RecordTypeId)
@@ -66,7 +66,7 @@ public with sharing class CaseFetchUserTimeZoneToUpdateBusinessHourFunction impl
               CaseMetadata.JapanIncidentRecordType
             }
           ),
-        new CaseFetchUserTimeZoneToUpdateBusinessHourFunction(cases)
+        new CaseFetchUserTZForBusinessHourFunction(cases)
       );
   }
 }

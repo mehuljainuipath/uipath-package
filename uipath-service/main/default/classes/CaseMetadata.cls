@@ -1,6 +1,7 @@
 public without sharing class CaseMetadata {
   public static final String CSM_ROLE = 'CSM';
   public static final String CTM_ROLE = 'Case Team Member';
+  public static final String ORIGIN_INTERNAL = 'Internally - On behalf of customer';
 
   public static Id getRecordTypeId(String developerName) {
     Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(developerName).getRecordTypeId();
@@ -118,6 +119,32 @@ public without sharing class CaseMetadata {
         FieldToRoleMap.put(Case.Account_STA__c, CTM_ROLE);
       }
       return FieldToRoleMap;
+    }
+    set;
+  }
+
+  public static Set<String> SupportedProducts {
+    get {
+      SupportedProducts = new Set<String>();
+      for (Product_Support_Queue_List__mdt productSupportQueue : [
+        SELECT Id, MasterLabel
+        FROM Product_Support_Queue_List__mdt
+        LIMIT 200
+      ]) {
+        SupportedProducts.add(productSupportQueue.MasterLabel);
+      }
+      return SupportedProducts;
+    }
+    set;
+  }
+
+  public static Map<String, Id> QueueNameToIdMap {
+    get {
+      Map<String, Id> QueueNameToIdMap = new Map<String, Id>();
+      for (Group eachGroup : [SELECT Id, DeveloperName FROM Group WHERE Type = 'Queue' LIMIT 500]) {
+        QueueNameToIdMap.put(eachGroup.DeveloperName, eachGroup.Id);
+      }
+      return QueueNameToIdMap;
     }
     set;
   }

@@ -152,9 +152,7 @@ public class CasesTest {
       RecordTypeId = incidentRecordTypeID,
       Status = 'New'
     );
-    fflib_SObjectDomain.Test.Database.onInsert(
-      new List<Case>{ newCase }
-    );
+    fflib_SObjectDomain.Test.Database.onInsert(new List<Case>{ newCase });
 
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(CaseMetadata.ORIGIN_INTERNAL, newCase.Origin, 'Origin is not updated');

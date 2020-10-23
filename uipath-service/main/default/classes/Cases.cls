@@ -20,6 +20,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseProactiveServiceFunction.assignToSupportTechnicalAdvisor(Records);
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnInsert(Records);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records);
     CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
     CaseCaptureFRFunction.deriveCaptureFR(Records);
   }
@@ -28,10 +29,12 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseQueueTransferFunction.deriveRelatedTo(Records, existingRecords);
     CaseReOpenEmailCheckboxFunction.deriveCheckboxOnUpdate(Records, existingRecords);
-
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnUpdate(Records, existingRecords);
     CaseCalculateTotalTimeFunction.deriveTotalTimeOnUpdate(Records, existingRecords);
     CaseCaptureFRFunction.deriveCaptureFR(Records);
+    CasePendingReasonChangeFunction.derivePendingTimestamps(Records, existingRecords);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records, existingRecords);
+    CaseFirstResponseOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
   }
 
   public override void onAfterInsert() {
@@ -43,10 +46,12 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     AbstractQueueable.enqueue(new CaseLivingSummaryQueueable(Records, existingRecords));
     CaseTeamMemberQueueable.addDefaultTeamMembers(Records);
     CaseCreateChildCaseQueueable.createChildCases(Records, existingRecords);
-
     CaseMilestoneQueueable.setCompletionDateOnMilestones(Records, existingRecords);
     CaseFirstResponseQueueable.setCompletionDateOnMilestones(Records, existingRecords);
     CaseMilestoneCompletionQueueable.setTargetDate(Records, existingRecords);
+    CaseL2ResolutionChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
+    CaseStatusChangeOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
+    CaseOwnerChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
   }
 
   public class Constructor implements fflib_SObjectDomain.IConstructable {

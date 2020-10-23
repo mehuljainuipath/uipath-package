@@ -23,6 +23,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records);
     CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
     CaseCaptureFRFunction.deriveCaptureFR(Records);
+    CaseEmailSentFunction.incrementEmailCount(Records);
   }
 
   public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {

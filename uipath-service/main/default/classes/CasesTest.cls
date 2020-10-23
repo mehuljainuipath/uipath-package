@@ -263,4 +263,23 @@ public class CasesTest {
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(parentCase.Description, updatedCase.Description, 'Description is updated');
   }
+
+  @IsTest
+  private static void incrementEmailCount_onInsert() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id contactId = fflib_IDGenerator.generate(Contact.SObjectType);
+    Id incidentRecordTypeID = CaseMetadata.IncidentRecordType;
+    Case newCase = new Case(
+      Id = caseId,
+      Subject = 'Test',
+      ContactId = contactId,
+      Origin = 'Web',
+      RecordTypeId = incidentRecordTypeID,
+      Status = 'New'
+    );
+    fflib_SObjectDomain.Test.Database.onInsert(new List<Case>{ newCase });
+
+    fflib_SObjectDomain.triggerHandler(Cases.class);
+    System.assertEquals(1, newCase.No_of_Emails_Sent__c, 'No. of emails sent is incremented');
+  }
 }

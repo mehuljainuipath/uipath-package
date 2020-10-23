@@ -207,7 +207,7 @@ public class CasesTest {
   }
 
   @IsTest
- private static void derivePendingTimestamps_onERCaseUpdate() {
+  private static void derivePendingTimestamps_onERCaseUpdate() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Id engagementRecordTypeId = CaseMetadata.EngagementRequestRecordType;
     Case oldCase = new Case(Id = caseId, Subject = 'Test', RecordTypeId = engagementRecordTypeId, Status = 'New');
@@ -259,11 +259,11 @@ public class CasesTest {
       new List<Case>{ updatedCase },
       new Map<Id, SObject>{ updatedCase.Id => oldCase }
     );
-    
+
     fflib_SObjectDomain.triggerHandler(Cases.class);
     System.assertEquals(parentCase.Description, updatedCase.Description, 'Description is updated');
   }
-  
+
   @IsTest
   private static void incrementEmailCount_onInsert() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);

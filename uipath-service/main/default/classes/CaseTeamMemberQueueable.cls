@@ -1,4 +1,4 @@
-public with sharing class CaseTeamMemberQueueable extends AbstractQueueable {
+public without sharing class CaseTeamMemberQueueable extends AbstractQueueable {
   private final List<SObject> cases;
 
   public CaseTeamMemberQueueable(List<SObject> cases) {
@@ -12,15 +12,12 @@ public with sharing class CaseTeamMemberQueueable extends AbstractQueueable {
 
   public void addDefaultCaseTeamMembers(List<Case> cases) {
     List<CaseTeamMember> newCaseTeamMembers = new List<CaseTeamMember>();
-    Map<Schema.SObjectField, String> fieldToRoleMap = new Map<Schema.SObjectField, String>();
-    fieldToRoleMap.put(Case.Account_CSM__c, CaseMetadata.CSM_ROLE);
-    fieldToRoleMap.put(Case.Account_STA__c, CaseMetadata.CTM_ROLE);
 
     for (Case caseRecord : cases) {
-      for (Schema.SObjectField caseField : fieldToRoleMap.keySet()) {
+      for (Schema.SObjectField caseField : CaseMetadata.FieldToRoleMap.keySet()) {
         if (caseRecord.get(caseField) != null) {
           newCaseTeamMembers.add(
-            getCaseTeamMember(caseRecord, (Id) caseRecord.get(caseField), fieldToRoleMap.get(caseField))
+            getCaseTeamMember(caseRecord, (Id) caseRecord.get(caseField), CaseMetadata.FieldToRoleMap.get(caseField))
           );
         }
       }

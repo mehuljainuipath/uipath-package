@@ -48,7 +48,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseCreateChildCaseQueueable.createChildCases(Records, existingRecords);
     CaseMilestoneQueueable.setCompletionDateOnMilestones(Records, existingRecords);
     CaseFirstResponseQueueable.setCompletionDateOnMilestones(Records, existingRecords);
-    CaseMilestoneCompletionQueueable.setTargetDate(Records, existingRecords);    
+    CaseMilestoneCompletionQueueable.setTargetDate(Records, existingRecords);
     CaseL2ResolutionChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
     CaseStatusChangeOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
     CaseOwnerChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);

@@ -5,35 +5,34 @@
  * Needs to be rewritten entirely
  * Updates the Completion date on CaseMilestone for Comm Update cases
  */
-public with sharing class CaseMilestoneQueueable extends AbstractQueueable {
+public without sharing class CaseMilestoneQueueable {
   private final List<SObject> cases;
-  private final Map<Id, SObject> oldCasessMap;
-  public CaseMilestoneQueueable(List<SObject> cases, Map<Id, SObject> oldCasessMap) {
-    super('CaseMilestoneQueueable');
-    this.cases = cases;
-    this.oldCasessMap = oldCasessMap;
-  }
+  private final Datetime currentDate;
+  private static Boolean isAlreadyRun = false;
 
-  public override void work() {
-    System.debug('CaseMilestoneQueueable work');
-    this.updateMilestones(cases);
-  }
-
-  private void updateMilestones(List<Case> cases) {
-    for (Case caseRecord : cases) {
-      caseRecord.Comm_Update__c = false;
-    }
+  private static void updateMilestones(Set<Id> caseIds) {
     List<CaseMilestone> milestoneList = new List<CaseMilestone>();
     for (CaseMilestone milestone : [
       SELECT Id, CompletionDate
       FROM CaseMilestone
-      WHERE CaseId IN :cases AND MilestoneType.Name = :Label.Communication_Milestone_Name AND IsCompleted = false
+      WHERE
+        CaseId IN :caseIds
+        AND MilestoneType.Name = :Label.Communication_Milestone_Name
+        AND IsCompleted = false
+        AND CompletionDate = null
       FOR UPDATE
     ]) {
-      milestone.CompletionDate = System.today();
+      milestone.CompletionDate = System.now();
       milestoneList.add(milestone);
     }
+    List<Case> casesToUpdate = new List<Case>();
+    for (Id caseRecordId : caseIds) {
+      casesToUpdate.add(new Case(Id = caseRecordId, Comm_Update__c = false));
+    }
+    fflib_SObjectDomain.getTriggerEvent(Cases.class).disableAll();
     update milestoneList;
+    update casesToUpdate;
+    fflib_SObjectDomain.getTriggerEvent(Cases.class).enableAll();
   }
 
   public static void setCompletionDateOnMilestones(List<SObject> cases, Map<Id, SObject> existingCases) {
@@ -61,10 +60,16 @@ public with sharing class CaseMilestoneQueueable extends AbstractQueueable {
           .also(Case.Comm_Update__c)
           .equals(true)
       )
+      .filter(Match.field(Case.No_of_Emails_Sent__c).notEquals(2))
       .asList();
 
     if (!eligibleCases.isEmpty()) {
-      AbstractQueueable.enqueue(new CaseMilestoneQueueable(eligibleCases, null));
+      if (!isAlreadyRun) {
+        //AbstractQueueable.enqueue(new CaseMilestoneQueueable(eligibleCases, System.now()));
+        List<Id> recordIds = Collection.of(cases).pluckIds();
+        updateMilestones(new Set<Id>(recordIds));
+        isAlreadyRun = true;
+      }
     }
   }
 }

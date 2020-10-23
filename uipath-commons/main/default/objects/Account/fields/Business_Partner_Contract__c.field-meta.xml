@@ -51,6 +51,21 @@
                 <default>false</default>
                 <label>Non-Standard</label>
             </value>
+            <value>
+                <fullName>MPA via Distributor Resale</fullName>
+                <default>false</default>
+                <label>MPA via Distributor Resale</label>
+            </value>
+            <value>
+                <fullName>MPA via Distributor BPO</fullName>
+                <default>false</default>
+                <label>MPA via Distributor BPO</label>
+            </value>
+            <value>
+                <fullName>MPA via Distributor Resale + BPO</fullName>
+                <default>false</default>
+                <label>MPA via Distributor Resale + BPO</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

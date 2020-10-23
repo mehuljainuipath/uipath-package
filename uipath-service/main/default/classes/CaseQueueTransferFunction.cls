@@ -53,13 +53,14 @@ public with sharing class CaseQueueTransferFunction implements SObjectToSObjectF
       [SELECT Id, DeveloperName, Type FROM Group WHERE DeveloperName IN :QUEUE_NAMES]
     );
     for (Case caseRecord : casesToUpdate) {
-      System.debug('Contains: ' + queueMap.containsKey(caseRecord.OwnerId));
-      System.debug('Contains: ' + caseRecord.OwnerId);
       if (!queueMap.containsKey(caseRecord.OwnerId)) {
         continue;
       }
       String ownerQueueName = queueMap.get(caseRecord.OwnerId).DeveloperName;
       caseRecord.RecordTypeId = queueToRecordTypeIdMap.get(ownerQueueName);
+      if (caseRecord.RecordTypeId == CaseMetadata.IncidentRecordType && caseRecord.Subscription_Code__c == 'TRIAL') {
+        caseRecord.RecordTypeId = CaseMetadata.ServiceRequestRecordType;
+      }
 
       if (caseRecord.Related_To__c == null) {
         caseRecord.Related_To__c = queueToRelatedToMap.get(ownerQueueName);

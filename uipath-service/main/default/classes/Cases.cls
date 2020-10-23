@@ -14,28 +14,31 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
   public Cases(List<Case> sObjectList) {
     super(sObjectList);
     this.Configuration.disableTriggerCRUDSecurity();
-    System.debug('Cases --- ' + Trigger.operationType);
   }
 
   public override void onBeforeInsert() {
     CaseProactiveServiceFunction.assignToSupportTechnicalAdvisor(Records);
     CaseSetEntitlementFunction.deriveEntitlement(Records);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnInsert(Records);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records);
     CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
+    CaseCaptureFRFunction.deriveCaptureFR(Records);
     CaseEmailSentFunction.incrementEmailCount(Records);
   }
 
   public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {
-    CaseMilestoneQueueable.setCompletionDateOnMilestones(Records, existingRecords);
     CaseSetEntitlementFunction.deriveEntitlement(Records);
-    CaseMilestoneCompletionFunction.deriveTargetDate(Records);
     CaseQueueTransferFunction.deriveRelatedTo(Records, existingRecords);
     CaseReOpenEmailCheckboxFunction.deriveCheckboxOnUpdate(Records, existingRecords);
     CaseSetAllMilestoneSuccessFunction.deriveMilestoneCompletedOnUpdate(Records, existingRecords);
+    CaseCalculateTotalTimeFunction.deriveTotalTimeOnUpdate(Records, existingRecords);
+    CaseCaptureFRFunction.deriveCaptureFR(Records);
+    CasePendingReasonChangeFunction.derivePendingTimestamps(Records, existingRecords);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records, existingRecords);
+    CaseFirstResponseOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
   }
 
   public override void onAfterInsert() {
-    AbstractQueueable.enqueue(new AccountProactiveServiceQueueable(Records));
     CaseTeamMemberQueueable.addDefaultTeamMembers(Records);
     CaseSetParentERQueueable.deriveParentEROnInsert(Records);
   }
@@ -44,18 +47,14 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     AbstractQueueable.enqueue(new CaseLivingSummaryQueueable(Records, existingRecords));
     CaseTeamMemberQueueable.addDefaultTeamMembers(Records);
     CaseCreateChildCaseQueueable.createChildCases(Records, existingRecords);
+    CaseMilestoneQueueable.setCompletionDateOnMilestones(Records, existingRecords);
     CaseFirstResponseQueueable.setCompletionDateOnMilestones(Records, existingRecords);
+    CaseMilestoneCompletionQueueable.setTargetDate(Records, existingRecords);
+    CaseL2ResolutionChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
+    CaseStatusChangeOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
+    CaseOwnerChangeOnERQueueable.setChildCaseUpdateNotificationOnParent(Records, existingRecords);
   }
 
-  public override void onValidate() {
-    //Collection.of(Records).mapAll(new CaseValidationFunction(null, this));
-  }
-
-  /*public override void onValidate(Map<Id, SObject> existingRecords) {
-    Collection.of(Records)
-      .mapAll(new CaseValidationFunction(existingRecords, this));
-  }
-  */
   public class Constructor implements fflib_SObjectDomain.IConstructable {
     public fflib_SObjectDomain construct(List<SObject> sObjectList) {
       return new Cases(sObjectList);

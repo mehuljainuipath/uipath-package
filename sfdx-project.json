@@ -10,7 +10,7 @@
     {
       "path": "uipath-commons",
       "package": "uipath-commons",
-      "default": true,
+      "default": false,
       "versionName": "Version 1.0.3",
       "versionNumber": "1.0.3.NEXT",
       "dependencies": [
@@ -54,7 +54,7 @@
       "package": "uipath-sales",
       "versionName": "Version 1.0",
       "versionNumber": "1.0.0.NEXT",
-      "default": false,
+      "default": true,
       "dependencies": [
         {
           "package": "uipath-core",

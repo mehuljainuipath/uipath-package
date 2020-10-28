@@ -4,6 +4,7 @@ public without sharing class SalesCaseMetadata {
   public static final String NOT_SIGNED = 'Not Signed';
 
   private static final String LEGAL_PRODUCT_REQUEST = 'Legal_Product_Request';
+  private static final String LEGAL_REQUEST = 'Legal_Request';
 
   public static Id getRecordTypeId(String developerName) {
     Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(developerName).getRecordTypeId();
@@ -13,6 +14,13 @@ public without sharing class SalesCaseMetadata {
   public static Id LegalProductRequestRecordType {
     get {
       return getRecordTypeId(LEGAL_PRODUCT_REQUEST);
+    }
+    set;
+  }
+
+  public static Id LegalRequestRecordType {
+    get {
+      return getRecordTypeId(LEGAL_REQUEST);
     }
     set;
   }

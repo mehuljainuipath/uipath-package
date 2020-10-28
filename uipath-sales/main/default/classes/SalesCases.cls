@@ -17,6 +17,7 @@ public with sharing class SalesCases extends fflib_SObjectDomain implements ICas
   }
 
   public override void onBeforeInsert() {
+    SalesCaseBillToWOOppFunction.updateBillToOnInsert(Records);
   }
 
   public override void onAfterUpdate(Map<Id, SObject> existingRecords) {

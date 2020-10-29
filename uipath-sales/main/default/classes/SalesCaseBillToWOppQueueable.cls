@@ -39,14 +39,16 @@ public with sharing class SalesCaseBillToWOppQueueable extends AbstractQueueable
       .filter(hasChanged)
       .filter(
         Match.field(Case.RecordTypeId)
-          .isIn(new Set<String>{ SalesCaseMetadata.LegalRequestRecordType, SalesCaseMetadata.UiPathJapanPartnerStandardRecordType })
+          .isIn(
+            new Set<String>{
+              SalesCaseMetadata.LegalRequestRecordType,
+              SalesCaseMetadata.UiPathJapanPartnerStandardRecordType
+            }
+          )
           .also(Case.Opportunity__c)
           .notEquals(null)
       )
-      .filter(
-        Match.field(Case.isClosed)
-          .equals(false)
-      )
+      .filter(Match.field(Case.isClosed).equals(false))
       .asList();
 
     if (!eligibleCases.isEmpty()) {

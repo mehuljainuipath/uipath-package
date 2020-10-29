@@ -16,10 +16,10 @@ public with sharing class SalesCaseBillToWOppQueueable extends AbstractQueueable
     List<Case> casesToUpdate = [SELECT AccountId, Opportunity__r.Sold_to_Partner__c FROM Case WHERE Id IN :cases];
 
     for (Case caseRecord : casesToUpdate) {
-      if (Opportunity__r.Sold_to_Partner__c != null) {
-        Bill_To__c = Opportunity__r.Sold_to_Partner__c;
+      if (caseRecord.Opportunity__r.Sold_to_Partner__c != null) {
+        caseRecord.Bill_To__c = caseRecord.Opportunity__r.Sold_to_Partner__c;
       } else {
-        Bill_To__c = AccountId;
+        caseRecord.Bill_To__c = caseRecord.AccountId;
       }
     }
 
@@ -40,14 +40,12 @@ public with sharing class SalesCaseBillToWOppQueueable extends AbstractQueueable
       .filter(
         Match.field(Case.RecordTypeId)
           .isIn(new Set<String>{ SalesCaseMetadata.LegalRequestRecordType, SalesCaseMetadata.UiPathJapanPartnerStandardRecordType })
-          .also(Case.Document_Type__c)
-          .equals(SalesCaseMetadata.TECHNOLOGY_ALLIANCE_AGREEMENT)
+          .also(Case.Opportunity__c)
+          .notEquals(null)
       )
       .filter(
-        Match.field(Case.Status)
-          .isIn(new Set<String>{ SalesCaseMetadata.SIGNED, SalesCaseMetadata.NOT_SIGNED })
-          .also(Case.AccountId)
-          .hasValue()
+        Match.field(Case.isClosed)
+          .equals(false)
       )
       .asList();
 

@@ -53,7 +53,7 @@ public class SalesCasesTest {
 
     Case oldCase = new Case(
       AccountId = oldAccountId,
-      Bill_To__c = AccountId,
+      Bill_To__c = oldAccountId,
       Id = caseId,
       Subject = 'Case1',
       RecordTypeId = legalRequestRecordTypeId,

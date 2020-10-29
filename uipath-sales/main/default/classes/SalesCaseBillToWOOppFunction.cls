@@ -30,6 +30,6 @@ public class SalesCaseBillToWOOppFunction implements SObjectToSObjectFunction {
     Collection.of(cases)
       .filter(accountChanged)
       .filter(Match.field(Case.RecordTypeId).isIn(new Set<String>{ SalesCaseMetadata.LegalRequestRecordType }))
-      .mapSome(Match.field(Case.Opportunity__c).equals(null), new SalesCaseBillToWOOppFunction(cases));
+      .mapSome(Match.field(Case.Opportunity__c).equals(null).also(Case.isClosed).equals(false), new SalesCaseBillToWOOppFunction(cases));
   }
 }

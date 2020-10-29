@@ -17,6 +17,19 @@ public class SalesCaseBillToWOOppFunction implements SObjectToSObjectFunction {
   public static void updateBillToOnInsert(List<Case> records) {
     Collection.of(records)
       .filter(Match.field(Case.RecordTypeId).isIn(new Set<String>{ SalesCaseMetadata.LegalRequestRecordType }))
-      .mapSome(Match.field(Case.Opportunity__c).hasValue(), new SalesCaseBillToWOOppFunction(records));
+      .mapSome(Match.field(Case.Opportunity__c).equals(null), new SalesCaseBillToWOOppFunction(records));
+  }
+
+  public static void updateBillToOnUpdate(List<SObject> cases, Map<Id, SObject> existingCases) {
+    HasRecordChanged accountChanged = new HasRecordChanged(
+      new Set<SObjectField>{ Case.AccountId },
+      cases,
+      existingCases
+    );
+
+    Collection.of(cases)
+      .filter(accountChanged)
+      .filter(Match.field(Case.RecordTypeId).isIn(new Set<String>{ SalesCaseMetadata.LegalRequestRecordType }))
+      .mapSome(Match.field(Case.Opportunity__c).equals(null), new SalesCaseBillToWOOppFunction(cases));
   }
 }

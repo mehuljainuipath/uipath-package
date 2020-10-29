@@ -1,32 +1,22 @@
 @IsTest
 public class SalesCasesTest {
   @IsTest
-  private static void testUpdateBillToOnInsert() {
+  private static void testUpdateBillWOOpsToOnInsert() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id accountId = fflib_IDGenerator.generate(Account.SObjectType);
     Id legalRequestRecordTypeId = SalesCaseMetadata.LegalRequestRecordType;
 
     Account acc = new Account(
+      Id = accountId,
       Name = 'TestAccountUK',
       Country__c = 'United Kingdom',
       BillingCountry = 'United Kingdom',
       Industry = 'Others'
     );
-    insert acc;
-
-    Opportunity opp = new Opportunity(
-      Name = 'Test',
-      AccountId = acc.Id,
-      StageName = 'Proposal',
-      CloseDate = System.today(),
-      Amount = 100,
-      Description = 'Test description'
-    );
-    insert opp;
 
     Case cs = new Case(
-      AccountId = acc.Id,
+      AccountId = accountId,
       Id = caseId,
-      Opportunity__c = opp.Id,
       Subject = 'Case1',
       RecordTypeId = legalRequestRecordTypeId,
       Status = 'New'
@@ -36,5 +26,54 @@ public class SalesCasesTest {
 
     fflib_SObjectDomain.triggerHandler(SalesCases.class);
     System.assertEquals(cs.AccountId, cs.Bill_To__c);
+  }
+
+  @IsTest
+  private static void testUpdateBillWOOpsToOnUpdate() {
+    Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
+    Id oldAccountId = fflib_IDGenerator.generate(Account.SObjectType);
+    Id newAccountId = fflib_IDGenerator.generate(Account.SObjectType);
+    Id legalRequestRecordTypeId = SalesCaseMetadata.LegalRequestRecordType;
+
+    Account oldAccount = new Account(
+      Id = oldAccountId,
+      Name = 'TestAccountUK',
+      Country__c = 'United Kingdom',
+      BillingCountry = 'United Kingdom',
+      Industry = 'Others'
+    );
+
+    Account newAccount = new Account(
+      Id = newAccountId,
+      Name = 'TestAccountUK2',
+      Country__c = 'United Kingdom',
+      BillingCountry = 'United Kingdom',
+      Industry = 'Others'
+    );
+
+    Case oldCase = new Case(
+      AccountId = oldAccountId,
+      Bill_To__c = AccountId,
+      Id = caseId,
+      Subject = 'Case1',
+      RecordTypeId = legalRequestRecordTypeId,
+      Status = 'New'
+    );
+
+    Case updatedCase = new Case(
+      AccountId = newAccountId,
+      Id = caseId,
+      Subject = 'Case1',
+      RecordTypeId = legalRequestRecordTypeId,
+      Status = 'New'
+    );
+
+    fflib_SObjectDomain.Test.Database.onUpdate(
+      new List<Case>{ updatedCase },
+      new Map<Id, SObject>{ oldCase.Id => oldCase }
+    );
+
+    fflib_SObjectDomain.triggerHandler(SalesCases.class);
+    System.assertEquals(newAccountId, updatedCase.Bill_To__c);
   }
 }

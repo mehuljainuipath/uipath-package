@@ -20,6 +20,10 @@ public with sharing class SalesCases extends fflib_SObjectDomain implements ICas
     SalesCaseBillToWOOppFunction.updateBillToOnInsert(Records);
   }
 
+  public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {
+    SalesCaseBillToWOOppFunction.updateBillToOnUpdate(Records, existingRecords);
+  }
+
   public override void onAfterUpdate(Map<Id, SObject> existingRecords) {
     CaseTechPartnerAgreementQueueable.deriveTechPartnershipDateOnAccount(Records, existingRecords);
   }

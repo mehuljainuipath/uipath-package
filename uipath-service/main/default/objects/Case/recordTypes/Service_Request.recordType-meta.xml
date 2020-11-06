@@ -9,6 +9,34 @@
     <picklistValues>
         <picklist>Closure_Classification__c</picklist>
         <values>
+            <fullName>3rd Party not under support scope</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Answer%2FSolution Provided</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Answer%2FSolution provided%28Referring KB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bug - Reported as JIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Abandoned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Found Solution%28Referring KB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer%2FEnvironment Specific</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Enhancement Request</fullName>
             <default>false</default>
         </values>
@@ -17,10 +45,6 @@
         <picklist>Country__c</picklist>
         <values>
             <fullName>Afghanistan</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Aland Islands</fullName>
             <default>false</default>
         </values>
         <values>
@@ -340,10 +364,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Ireland</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Ireland %7BRepublic%7D</fullName>
             <default>false</default>
         </values>
@@ -641,10 +661,6 @@
         </values>
         <values>
             <fullName>Serbia</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Serbia and Montenegro</fullName>
             <default>false</default>
         </values>
         <values>

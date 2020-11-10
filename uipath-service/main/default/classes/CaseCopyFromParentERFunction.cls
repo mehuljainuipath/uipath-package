@@ -31,8 +31,6 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
   }
 
   public SObject apply(Case record) {
-    System.debug('### apply ' + record);
-    System.debug('### parentCaseMap ' + parentCaseMap);
     if (!parentCaseMap.containsKey(record.ParentId)) {
       return null;
     }
@@ -43,7 +41,11 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
     record.Priority = parentCase.Priority;
     record.Related_To__c = parentCase.Related_To__c;
     record.Sub_Component__c = parentCase.Sub_Component__c;
-    record.Subject = 'ER:' + record.CaseNumber + parentCase.Subject;
+    if (record.CaseNumber != null) {
+      record.Subject = 'ER: ' + record.CaseNumber + ' ' + parentCase.Subject;
+    } else {
+      record.Subject = 'ER: ' + CaseMetadata.CASE_NUMBER + ' ' + parentCase.Subject;
+    }
     if (record.RecordTypeId == CaseMetadata.JapanEngagementRequestRecordType) {
       record.Actual_Result__c = parentCase.Actual_Result__c;
       record.Case_Web_Form_Region__c = parentCase.Case_Web_Form_Region__c;
@@ -82,7 +84,6 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
   }
 
   public static void deriveChildCaseFromParent(List<SObject> Records, Map<Id, SObject> existingRecords) {
-    System.debug('### deriveChildCaseFromParent');
     SObjectPredicate hasChanged = new HasRecordChanged(
       new Set<SObjectField>{ Case.Copy_From_Parent_Case__c },
       Records,

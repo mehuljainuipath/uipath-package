@@ -7,7 +7,7 @@
  */
 public with sharing class CaseFirstResponseOnERQueueable extends AbstractQueueable {
   private final List<SObject> cases;
-
+  private static Boolean isAlreadyRun = false;
   public CaseFirstResponseOnERQueueable(List<SObject> cases) {
     super('CaseFirstResponseOnERQueueable');
     this.cases = cases;
@@ -61,7 +61,10 @@ public with sharing class CaseFirstResponseOnERQueueable extends AbstractQueueab
       .asList();
 
     if (!eligibleCases.isEmpty()) {
-      AbstractQueueable.enqueue(new CaseFirstResponseOnERQueueable(eligibleCases));
+      if (!isAlreadyRun) {
+        isAlreadyRun = true;
+        AbstractQueueable.enqueue(new CaseFirstResponseOnERQueueable(eligibleCases));
+      }
     }
   }
 }

@@ -261,7 +261,28 @@ public class CasesTest {
     );
 
     fflib_SObjectDomain.triggerHandler(Cases.class);
-    System.assertEquals(parentCase.Description, updatedCase.Description, 'Description is updated');
+    System.assertEquals(parentCase.Description, updatedCase.Description, 'Description is not updated');
+    System.assertEquals(
+      'ER: ' +
+      CaseMetadata.CASE_NUMBER +
+      ' ' +
+      parentCase.Subject,
+      updatedCase.Subject,
+      'Subject is not updated'
+    );
+
+    updatedCase = [SELECT Id, Subject, CaseNumber FROM Case WHERE Id = :updatedCase.Id];
+    updatedCase.Subject = 'ER: ' + CaseMetadata.CASE_NUMBER + ' ' + parentCase.Subject;
+    new CaseERSubjectQueueable(new List<Case>{ updatedCase }).work();
+    updatedCase = [SELECT Id, Subject, CaseNumber FROM Case WHERE Id = :updatedCase.Id];
+    System.assertEquals(
+      'ER: ' +
+      updatedCase.CaseNumber +
+      ' ' +
+      parentCase.Subject,
+      updatedCase.Subject,
+      'Subject is not updated'
+    );
   }
 
   @IsTest

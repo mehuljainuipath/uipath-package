@@ -31,6 +31,7 @@ public with sharing class SalesCases extends fflib_SObjectDomain implements ISal
 
   public override void onAfterInsert() {
     SalesCaseLegalOpportunityQueueable.deriveCaseCount(Records);
+    AbstractQueueable.enqueue(new SalesCaseOppFieldsLegalFinanceQueueable(Records, existingRecords));
   }
 
   public override void onAfterUpdate(Map<Id, SObject> existingRecords) {

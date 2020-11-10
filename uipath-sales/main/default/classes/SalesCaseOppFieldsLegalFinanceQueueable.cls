@@ -9,8 +9,8 @@ public with sharing class SalesCaseOppFieldsLegalFinanceQueueable extends Abstra
   private final List<SObject> cases;
   private final Map<Id, SObject> oldCasessMap;
 
-  public CaseLivingSummaryQueueable(List<SObject> cases, Map<Id, SObject> oldCasessMap) {
-    super('CaseLivingSummaryQueueable');
+  public SalesCaseOppFieldsLegalFinanceQueueable(List<SObject> cases, Map<Id, SObject> oldCasessMap) {
+    super('SalesCaseOppFieldsLegalFinanceQueueable');
     this.cases = cases;
     this.oldCasessMap = oldCasessMap;
   }
@@ -19,7 +19,7 @@ public with sharing class SalesCaseOppFieldsLegalFinanceQueueable extends Abstra
     this.setOpptyFieldsFromLegalAndFinanceCase(cases, oldCasessMap);
   }
 
-  private void setOpptyFieldsFromLegalAndFinanceCase(Map<Id, Case> newMap, Map<Id, Case> oldMap) {
+  private void setOpptyFieldsFromLegalAndFinanceCase(List<SObject> cases, Map<Id, SObject> oldMap) {
     
     /** CPQ Controls **/
     Id cpqRtId = null;
@@ -50,7 +50,7 @@ public with sharing class SalesCaseOppFieldsLegalFinanceQueueable extends Abstra
     List<Case> CPQFinanceCases = new List<Case>();
     Set<Id> opportunityIds = new Set<Id>();
 
-    for (Case updatedCase : newMap.Values()) {
+    for (SObject updatedCase : cases) {
       if (updatedCase.Opportunity__c != null) {
         opportunityIds.add(updatedCase.Opportunity__c);
       }
@@ -72,7 +72,7 @@ public with sharing class SalesCaseOppFieldsLegalFinanceQueueable extends Abstra
       ]
     );
 
-    for (Case updatedCase : newMap.Values()) {
+    for (Case updatedCase : cases) {
       Opportunity opp = null;
       opp = opportunityMap.get(updatedCase.Opportunity__c);
 

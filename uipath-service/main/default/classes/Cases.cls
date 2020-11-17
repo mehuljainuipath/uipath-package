@@ -34,7 +34,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseCalculateTotalTimeFunction.deriveTotalTimeOnUpdate(Records, existingRecords);
     CaseCaptureFRFunction.deriveCaptureFR(Records);
     CasePendingReasonChangeFunction.derivePendingTimestamps(Records, existingRecords);
-    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records, existingRecords);
+    CaseCopyFromParentERFunction.deriveChildCaseFromParent(Records);
     CaseFirstResponseOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
   }
 

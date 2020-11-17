@@ -82,28 +82,4 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
         new CaseCopyFromParentERFunction(Records)
       );
   }
-
-  public static void deriveChildCaseFromParent(List<SObject> Records, Map<Id, SObject> existingRecords) {
-    SObjectPredicate hasChanged = new HasRecordChanged(
-      new Set<SObjectField>{ Case.Copy_From_Parent_Case__c },
-      Records,
-      existingRecords
-    );
-
-    Collection.of(Records)
-      .filter(hasChanged)
-      .filter(
-        Match.field(Case.RecordTypeId)
-          .isIn(
-            new Set<String>{ CaseMetadata.EngagementRequestRecordType, CaseMetadata.JapanEngagementRequestRecordType }
-          )
-          .also(Case.Copy_From_Parent_Case__c)
-          .equals(true)
-          .also(Case.Status)
-          .notEquals('Closed')
-          .also(Case.ParentId)
-          .hasValue()
-      )
-      .mapAll(new CaseCopyFromParentERFunction(Records));
-  }
 }

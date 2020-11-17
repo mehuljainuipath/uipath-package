@@ -26,7 +26,7 @@ public with sharing class CaseFirstResponseOnERQueueable extends AbstractQueueab
       SELECT Id, CaseNumber, ParentId, First_Response__c
       FROM Case
       WHERE Parent.Status != 'Closed' AND Id IN :cases
-    ]) {
+    ]) {      
       Case parent = new Case();
       parent.Id = record.ParentId;
       parent.Child_case_Updates_Notification__c =

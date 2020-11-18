@@ -41,10 +41,11 @@ public with sharing class CaseCopyFromParentERFunction implements SObjectToSObje
     record.Priority = parentCase.Priority;
     record.Related_To__c = parentCase.Related_To__c;
     record.Sub_Component__c = parentCase.Sub_Component__c;
+    String parentSubject = (parentCase.Subject != null) ? parentCase.Subject : '';
     if (record.CaseNumber != null) {
-      record.Subject = 'ER: ' + record.CaseNumber + ' ' + parentCase.Subject;
+      record.Subject = 'ER: ' + record.CaseNumber + ' ' + parentSubject;
     } else {
-      record.Subject = 'ER: ' + CaseMetadata.CASE_NUMBER + ' ' + parentCase.Subject;
+      record.Subject = 'ER: ' + CaseMetadata.CASE_NUMBER + ' ' + parentSubject;
     }
     if (record.RecordTypeId == CaseMetadata.JapanEngagementRequestRecordType) {
       record.Actual_Result__c = parentCase.Actual_Result__c;

@@ -64,7 +64,7 @@ public with sharing class CaseFirstResponseOnERQueueable extends AbstractQueueab
         isAlreadyRun = true;
         AbstractQueueable.enqueue(new CaseFirstResponseOnERQueueable(eligibleCases));
         for (Case caseRecord : eligibleCases) {
-          caseRecord.Status = 'In Progress';
+          caseRecord.Status = 'In Process';
         }
       }
     }

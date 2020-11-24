@@ -10,6 +10,9 @@ public with sharing class CaseEmailSentFunction implements SObjectToSObjectFunct
   }
 
   public SObject apply(Case caseRecord) {
+    if (UserInfo.getUserType() != 'Standard') {
+      return caseRecord;
+    }
     if (
       String.isNotBlank(caseRecord.Subject) && caseRecord.Subject.contains('Follow Up') ||
       ORIGIN_EMAIL_SENT.contains(caseRecord.Origin)

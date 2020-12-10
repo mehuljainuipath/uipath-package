@@ -28,7 +28,6 @@ public class CaseFirstResponseQueueableTest {
     update incidentCase;
     Test.stopTest();
     List<CaseMilestone> milestones = [SELECT Id, CompletionDate FROM CaseMilestone];
-    System.debug('### milestones ' + milestones);
     System.assertEquals(true, CaseFirstResponseQueueable.isAlreadyRun, 'The milestone is not executed');
   }
 }

@@ -39,6 +39,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseFirstResponseOnERQueueable.setChildCaseUpdateNotification(Records, existingRecords);
     CaseCaptureTimeForStatusChangeFunction.deriveCaptureTimeForStatusChangeOnUpdate(Records, existingRecords);
     CaseEmailReceivedFunction.deriveCustomerContact(Records, existingRecords);
+    CaseEmailSentFunction.deriveCustomerContact(Records, existingRecords);
   }
 
   public override void onAfterInsert() {

@@ -25,6 +25,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetAutocloseStepsFunction.deriveAutocloseSteps(Records);
     CaseCaptureFRFunction.deriveCaptureFR(Records);
     CaseCaptureTimeForStatusChangeFunction.deriveCaptureTimeForStatusChangeOnInsert(Records);
+    CaseUpdateCommValueFunction.deriveCommValue(Records);
   }
 
   public override void onBeforeUpdate(Map<Id, SObject> existingRecords) {
@@ -41,6 +42,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseEmailReceivedFunction.deriveCustomerContact(Records, existingRecords);
     CaseEmailSentFunction.deriveCustomerContact(Records, existingRecords);
     CaseReOpenFunction.deriveCaseReOpen(Records, existingRecords);
+    CaseUpdateCommValueFunction.deriveCommValue(Records);
   }
 
   public override void onAfterInsert() {

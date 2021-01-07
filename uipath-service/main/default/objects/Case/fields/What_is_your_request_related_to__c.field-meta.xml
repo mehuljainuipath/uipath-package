@@ -33,16 +33,6 @@
                 <label>Certification</label>
             </value>
             <value>
-                <fullName>Feedback</fullName>
-                <default>false</default>
-                <label>Feedback</label>
-            </value>
-            <value>
-                <fullName>Learning Platform Issues</fullName>
-                <default>false</default>
-                <label>Learning Platform Issues</label>
-            </value>
-            <value>
                 <fullName>Partner Training</fullName>
                 <default>false</default>
                 <label>Partner Training</label>

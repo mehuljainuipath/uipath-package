@@ -2,6 +2,7 @@ public without sharing class CaseMetadata {
   public static final String CSM_ROLE = 'CSM';
   public static final String CTM_ROLE = 'Case Team Member';
   public static final String CASE_NUMBER = '##CASE_NUMBER##';
+  public static final String SUBSCRIPTION_TRIAL = 'TRIAL';
 
   public static final STRING PENDING_FROM_PRODUCT = 'Pending from Product';
   public static final STRING PENDING_FROM_INFRA = 'Pending from Infra/MCS';

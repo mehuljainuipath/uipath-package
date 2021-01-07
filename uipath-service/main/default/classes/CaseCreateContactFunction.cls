@@ -13,30 +13,28 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
   }
 
   public void createContactUpdateCase(List<Case> newCases) {
-    Id contactRecordtypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact').getRecordTypeId();
-    Id dummyAccountId = Label.Dummy_Account;
-    Id academyAccountId = Label.Academy_Unassigned_Acc;
-
-    List<String> emailAddresses = new List<String>();
-    for (Case newCaseRecord : newCases) {
-      emailAddresses.add(newCaseRecord.SuppliedEmail);
-    }
-
+    List<String> emailAddresses = Collection.of(newCases).pluckStrings(Case.SuppliedEmail);
     Set<String> existingEmails = new Set<String>();
     for (Contact existingContact : [SELECT Id, Email FROM Contact WHERE Email IN :emailAddresses]) {
       existingEmails.add(existingContact.Email);
     }
 
-    Set<Id> accountIds = new Set<Id>();
-    for (Case newCaseRecord : newCases) {
-      if (newCaseRecord.RecordTypeId == CaseMetadata.IncidentRecordType && newCaseRecord.AccountId != null) {
-        accountIds.add(newCaseRecord.accountId);
-      }
-    }
+    List<Id> accountIdsAsList = Collection.of(newCases)
+      .filter(Match.field(Case.RecordTypeId).equals(CaseMetadata.IncidentRecordType).also(Case.AccountId).hasValue())
+      .pluckIds(Case.AccountId);
 
+    Set<Id> accountIds = new Set<Id>(accountIdsAsList);
     Map<Id, Account> accountMap = new Map<Id, Account>([SELECT Id, OwnerId FROM Account WHERE Id IN :accountIds]);
     emailToContactMap = new Map<String, Contact>();
     List<Case> casesToUpdate = new List<Case>();
+    Id contactRecordtypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact').getRecordTypeId();
+    
+    Map<String, Id> nameToAccountMap = new Map<String, Id>();
+    for (Account unassignedAccount : [SELECT Id, Name FROM Account WHERE Name IN (:Label.Dummy_Account, :Label.Academy_Unassigned_Acc) LIMIT 2]) {
+      nameToAccountMap.put(unassignedAccount.Name, unassignedAccount.Id);
+    }
+    Id dummyAccountId = nameToAccountMap.get(Label.Dummy_Account);
+    Id academyAccountId = nameToAccountMap.get(Label.Academy_Unassigned_Acc);
 
     for (Case newCaseRecord : newCases) {
       if (newCaseRecord.SuppliedName.contains('@')) {
@@ -53,7 +51,7 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
       }
       String firstNameFromWeb = (numberOfNames > 1) ? nameParts[0] : '';
       String lastNameFromWeb = nameParts[numberOfNames - 1];
-
+      
       Contact newContact = new Contact(
         FirstName = firstNameFromWeb,
         LastName = lastNameFromWeb,
@@ -88,6 +86,10 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
           .hasValue()
           .also(Case.SuppliedName)
           .hasValue()
+          .also(Case.Subscription_Code__c)
+          .notEquals(CaseMetadata.SUBSCRIPTION_TRIAL)
+          .also(Case.Is_Free_Mailer__c)
+          .equals(false)
       )
       .asList();
     if (!eligibleCases.isEmpty()) {

@@ -34,6 +34,6 @@ public class CaseEmailSentFunction implements SObjectToSObjectFunction {
             }
           )
       )
-      .mapSome(Match.field(Case.No_of_Emails_Sent__c).equals(2), new CaseEmailSentFunction(Records));
+      .mapSome(Match.field(Case.No_of_Emails_Sent__c).greaterThanOrEquals(2), new CaseEmailSentFunction(Records));
   }
 }

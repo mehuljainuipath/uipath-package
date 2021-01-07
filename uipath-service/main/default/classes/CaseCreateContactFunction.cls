@@ -29,12 +29,8 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
     List<Case> casesToUpdate = new List<Case>();
     Id contactRecordtypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact').getRecordTypeId();
     
-    Map<String, Id> nameToAccountMap = new Map<String, Id>();
-    for (Account unassignedAccount : [SELECT Id, Name FROM Account WHERE Name IN (:Label.Dummy_Account, :Label.Academy_Unassigned_Acc) LIMIT 2]) {
-      nameToAccountMap.put(unassignedAccount.Name, unassignedAccount.Id);
-    }
-    Id dummyAccountId = nameToAccountMap.get(Label.Dummy_Account);
-    Id academyAccountId = nameToAccountMap.get(Label.Academy_Unassigned_Acc);
+    Id dummyAccountId = CaseMetadata.UnAssignedAccountMap.get(Label.Dummy_Account);
+    Id academyAccountId = CaseMetadata.UnAssignedAccountMap.get(Label.Academy_Unassigned_Acc);
 
     for (Case newCaseRecord : newCases) {
       if (newCaseRecord.Is_Free_Mailer__c) {

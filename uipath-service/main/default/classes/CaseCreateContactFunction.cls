@@ -28,7 +28,7 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
     emailToContactMap = new Map<String, Contact>();
     List<Case> casesToUpdate = new List<Case>();
     Id contactRecordtypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact').getRecordTypeId();
-    
+
     Id dummyAccountId = CaseMetadata.UnAssignedAccountMap.get(Label.Dummy_Account);
     Id academyAccountId = CaseMetadata.UnAssignedAccountMap.get(Label.Academy_Unassigned_Acc);
 
@@ -50,7 +50,7 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
       }
       String firstNameFromWeb = (numberOfNames > 1) ? nameParts[0] : '';
       String lastNameFromWeb = nameParts[numberOfNames - 1];
-      
+
       Contact newContact = new Contact(
         FirstName = firstNameFromWeb,
         LastName = lastNameFromWeb,

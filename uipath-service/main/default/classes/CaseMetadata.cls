@@ -146,7 +146,12 @@ public without sharing class CaseMetadata {
     get {
       if (UnAssignedAccountMap == null) {
         UnAssignedAccountMap = new Map<String, Id>();
-        for (Account record : [SELECT Id, Name FROM Account WHERE Name IN (:Label.Dummy_Account, :Label.Academy_Unassigned_Acc) LIMIT 2]) {
+        for (Account record : [
+          SELECT Id, Name
+          FROM Account
+          WHERE Name IN (:Label.Dummy_Account, :Label.Academy_Unassigned_Acc)
+          LIMIT 2
+        ]) {
           UnAssignedAccountMap.put(record.Name, record.Id);
         }
       }

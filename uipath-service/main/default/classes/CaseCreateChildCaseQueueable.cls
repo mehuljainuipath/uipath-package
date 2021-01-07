@@ -3,6 +3,7 @@
  */
 public with sharing class CaseCreateChildCaseQueueable extends AbstractQueueable {
   private final List<SObject> cases;
+  private static Boolean isAlreadyRun = false;
 
   public CaseCreateChildCaseQueueable(List<SObject> cases) {
     super('CaseCreateChildCaseQueueable');
@@ -16,7 +17,12 @@ public with sharing class CaseCreateChildCaseQueueable extends AbstractQueueable
   private void createChildCase(List<Case> cases) {
     List<Case> children = new List<Case>();
 
-    Group productSuportQueue = [SELECT Id FROM Group WHERE Type = 'Queue' AND NAME = 'Product_Support_Queue' LIMIT 1];
+    Group productSuportQueue = [
+      SELECT Id
+      FROM Group
+      WHERE Type = 'Queue' AND DeveloperName = 'Product_Support_Queue'
+      LIMIT 1
+    ];
 
     for (Case cs : cases) {
       Case child = new Case(
@@ -55,12 +61,19 @@ public with sharing class CaseCreateChildCaseQueueable extends AbstractQueueable
           .also(Case.Status)
           .equals('Closed')
           .also(Case.CSAT__c)
+          .hasValue()
+          .also(Case.CSAT__c)
+          .greaterThan(0)
+          .also(Case.CSAT__c)
           .lessThanOrEquals(2)
       )
       .asList();
 
     if (!eligibleCases.isEmpty()) {
-      AbstractQueueable.enqueue(new CaseCreateChildCaseQueueable(eligibleCases));
+      if (!isAlreadyRun) {
+        isAlreadyRun = true;
+        AbstractQueueable.enqueue(new CaseCreateChildCaseQueueable(eligibleCases));
+      }
     }
   }
 }

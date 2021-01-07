@@ -49,11 +49,15 @@ sfdx force:org:create -s -f config/project-scratch-def.json --durationdays 30 --
 
 #### Obtain the 04t Ids for unlocked packages by running:
 
+```bash
 sfdx force:package:version:list -v DevHub
+```
 
 #### Obtain the 04t Ids for managed packages by running:
 
+```bash
 sfdx force:package:installed:list -u DevHub
+```
 
 - uipath-core
 
@@ -68,6 +72,12 @@ sfdx force:package:install --package 04t***** -u scratch --noprompt  -w 15
 ```
 
 - uipath-commons
+
+```bash
+sfdx force:package:install --package 04t**** -k unlockedclear -u scratch  -w 15
+```
+
+- uipath-service
 
 ```bash
 sfdx force:package:install --package 04t**** -k unlockedclear -u scratch  -w 15

@@ -5,7 +5,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Academy Unassigned Acc</shortDescription>
-        <value>0013600001yedOyAAI</value>
+        <value>unassigned</value>
     </labels>
     <labels>
         <fullName>Communication_Milestone_Name</fullName>
@@ -19,6 +19,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Dummy Account</shortDescription>
-        <value>0013600001yedOy</value>
+        <value>unassigned</value>
     </labels>
 </CustomLabels>

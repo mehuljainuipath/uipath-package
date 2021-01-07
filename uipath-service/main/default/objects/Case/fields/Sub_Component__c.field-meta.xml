@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Sub_Component__c</fullName>
+    <deprecated>false</deprecated>
     <externalId>false</externalId>
     <label>Sub Component</label>
     <required>false</required>
@@ -12,7 +13,7 @@
         <controllingField>Related_To__c</controllingField>
         <restricted>true</restricted>
         <valueSetDefinition>
-            <sorted>true</sorted>
+            <sorted>false</sorted>
             <value>
                 <fullName>Abby</fullName>
                 <default>false</default>
@@ -744,18 +745,6 @@
                 <label>Orchestrator_General Queries</label>
             </value>
             <value>
-                <fullName>Orchestrator_Infra</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Orchestrator_Infra</label>
-            </value>
-            <value>
-                <fullName>Orchestrator_Installation</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Orchestrator_Installation</label>
-            </value>
-            <value>
                 <fullName>Orchestrator_Library</fullName>
                 <default>false</default>
                 <label>Orchestrator_Library</label>
@@ -764,12 +753,6 @@
                 <fullName>Orchestrator_Mobile</fullName>
                 <default>false</default>
                 <label>Orchestrator_Mobile</label>
-            </value>
-            <value>
-                <fullName>Orchestrator_Upgrade</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Orchestrator_Upgrade</label>
             </value>
             <value>
                 <fullName>Orchestrator Connectivity/Settings</fullName>
@@ -1197,12 +1180,6 @@
                 <label>Training (Tech-Support)</label>
             </value>
             <value>
-                <fullName>Training and Courses</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Training and Courses</label>
-            </value>
-            <value>
                 <fullName>Training Diploma</fullName>
                 <default>false</default>
                 <label>Training Diploma</label>
@@ -1283,14 +1260,14 @@
                 <label>VMWare Actvities</label>
             </value>
             <value>
-                <fullName>Webhook</fullName>
-                <default>false</default>
-                <label>Webhook</label>
-            </value>
-            <value>
                 <fullName>Web_Services</fullName>
                 <default>false</default>
                 <label>Web Services</label>
+            </value>
+            <value>
+                <fullName>Webhook</fullName>
+                <default>false</default>
+                <label>Webhook</label>
             </value>
             <value>
                 <fullName>Word</fullName>
@@ -1311,6 +1288,90 @@
                 <fullName>X-Ray Integration</fullName>
                 <default>false</default>
                 <label>X-Ray Integration</label>
+            </value>
+            <value>
+                <fullName>Server Setting</fullName>
+                <default>false</default>
+                <label>Server Setting</label>
+            </value>
+            <value>
+                <fullName>User Management</fullName>
+                <default>false</default>
+                <label>User Management</label>
+            </value>
+            <value>
+                <fullName>Release/Generate Cache</fullName>
+                <default>false</default>
+                <label>Release/Generate Cache</label>
+            </value>
+            <value>
+                <fullName>Connectors</fullName>
+                <default>false</default>
+                <label>Connectors</label>
+            </value>
+            <value>
+                <fullName>Apps</fullName>
+                <default>false</default>
+                <label>Apps</label>
+            </value>
+            <value>
+                <fullName>Integration with Automation Hub</fullName>
+                <default>false</default>
+                <label>Integration with Automation Hub</label>
+            </value>
+            <value>
+                <fullName>Integration with Test Manager</fullName>
+                <default>false</default>
+                <label>Integration with Test Manager</label>
+            </value>
+            <value>
+                <fullName>Diagram Editor</fullName>
+                <default>false</default>
+                <label>Diagram Editor</label>
+            </value>
+            <value>
+                <fullName>Action Editor</fullName>
+                <default>false</default>
+                <label>Action Editor</label>
+            </value>
+            <value>
+                <fullName>Capturing</fullName>
+                <default>false</default>
+                <label>Capturing</label>
+            </value>
+            <value>
+                <fullName>Export to Word</fullName>
+                <default>false</default>
+                <label>Export to Word</label>
+            </value>
+            <value>
+                <fullName>Export to Studio</fullName>
+                <default>false</default>
+                <label>Export to Studio</label>
+            </value>
+            <value>
+                <fullName>Orchestrator_Infra</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Orchestrator_Infra</label>
+            </value>
+            <value>
+                <fullName>Orchestrator_Installation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Orchestrator_Installation</label>
+            </value>
+            <value>
+                <fullName>Orchestrator_Upgrade</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Orchestrator_Upgrade</label>
+            </value>
+            <value>
+                <fullName>Training and Courses</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Training and Courses</label>
             </value>
         </valueSetDefinition>
         <valueSettings>
@@ -1342,16 +1403,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Task Capture</controllingFieldValue>
-            <valueName>PDD &amp; Templates</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>UiPath Go</controllingFieldValue>
-            <controllingFieldValue>Process Gold</controllingFieldValue>
-            <controllingFieldValue>Learning Platform Inquiries</controllingFieldValue>
-            <controllingFieldValue>Licensing</controllingFieldValue>
-            <valueName>NA</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>UiPath Go</controllingFieldValue>
             <controllingFieldValue>Process Gold</controllingFieldValue>
             <controllingFieldValue>Agent Desktop</controllingFieldValue>
@@ -1375,12 +1426,67 @@
             <valueName>Others</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Integration with Automation Hub</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Integration with Test Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Diagram Editor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Action Editor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Capturing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Export to Word</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>Export to Studio</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>UiPath Go</controllingFieldValue>
+            <controllingFieldValue>Learning Platform Inquiries</controllingFieldValue>
+            <controllingFieldValue>Licensing</controllingFieldValue>
+            <valueName>NA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
             <controllingFieldValue>Agent Desktop</controllingFieldValue>
             <controllingFieldValue>Apps</controllingFieldValue>
             <controllingFieldValue>Studio X</controllingFieldValue>
             <controllingFieldValue>UiPath Test Suite</controllingFieldValue>
             <controllingFieldValue>Connect Enterprise</controllingFieldValue>
             <valueName>Licensing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
+            <valueName>Server Setting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
+            <valueName>User Management</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
+            <valueName>Release/Generate Cache</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
+            <valueName>Connectors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
+            <valueName>Apps</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Agent Desktop</controllingFieldValue>

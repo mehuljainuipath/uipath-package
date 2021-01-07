@@ -37,6 +37,9 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
     Id academyAccountId = nameToAccountMap.get(Label.Academy_Unassigned_Acc);
 
     for (Case newCaseRecord : newCases) {
+      if (newCaseRecord.Is_Free_Mailer__c) {
+        return;
+      }
       if (newCaseRecord.SuppliedName.contains('@')) {
         return;
       }
@@ -88,8 +91,6 @@ public with sharing class CaseCreateContactFunction implements SObjectToSObjectF
           .hasValue()
           .also(Case.Subscription_Code__c)
           .notEquals(CaseMetadata.SUBSCRIPTION_TRIAL)
-          .also(Case.Is_Free_Mailer__c)
-          .equals(false)
       )
       .asList();
     if (!eligibleCases.isEmpty()) {

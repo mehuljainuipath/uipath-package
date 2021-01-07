@@ -25,7 +25,13 @@ public class CaseEmailReceivedFunction implements SObjectToSObjectFunction {
       .filter(hasChanged)
       .filter(
         Match.field(Case.RecordTypeId)
-          .isIn(new Set<String>{ CaseMetadata.AcademyRecordType, CaseMetadata.SalesOperationRecordType })
+          .isIn(
+            new Set<String>{
+              CaseMetadata.AcademyRecordType,
+              CaseMetadata.SalesOperationRecordType,
+              CaseMetadata.ServiceRequestRecordType
+            }
+          )
       )
       .mapAll(new CaseEmailReceivedFunction(Records));
   }

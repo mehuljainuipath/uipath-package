@@ -525,7 +525,7 @@ public class CasesTest {
       Subject = 'Test',
       RecordTypeId = academyId,
       Status = 'In Process',
-      No_of_Emails_Sent__c = 1
+      No_of_Emails_Sent__c = 2
     );
     fflib_SObjectDomain.Test.Database.onUpdate(
       new List<Case>{ updatedCase },

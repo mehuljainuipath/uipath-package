@@ -203,15 +203,7 @@
     <picklistValues>
         <picklist>Area__c</picklist>
         <values>
-            <fullName>AMER North %26 BFS</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>AMER South %26 Gov</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>AMER West</fullName>
+            <fullName>Central</fullName>
             <default>false</default>
         </values>
         <values>
@@ -220,6 +212,14 @@
         </values>
         <values>
             <fullName>EECIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gov %2F Fed</fullName>
             <default>false</default>
         </values>
         <values>
@@ -235,7 +235,26 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>West</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Western Europe</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BPO_Discount_Tier__c</picklist>
+        <values>
+            <fullName>15%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>35%25</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -441,6 +460,36 @@
         </values>
         <values>
             <fullName>Velocity</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Company_Rankings__c</picklist>
+        <values>
+            <fullName>Forbes 2000</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fortune 1000 Rank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Global Fortune 500</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Company_Tier__c</picklist>
+        <values>
+            <fullName>A</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -983,10 +1032,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Macedonia the former Yugoslav Republic of</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Madagascar</fullName>
             <default>false</default>
         </values>
@@ -1112,6 +1157,10 @@
         </values>
         <values>
             <fullName>Norfolk Island</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>North Macedonia</fullName>
             <default>false</default>
         </values>
         <values>
@@ -1475,6 +1524,21 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Credit_Hold__c</picklist>
+        <values>
+            <fullName>Auto</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Off</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Customer_Notifications_requirements__c</picklist>
         <values>
             <fullName>A SUSPECTED data breach or security incident %28non confirmed breaches%29</fullName>
@@ -1502,6 +1566,21 @@
         </values>
         <values>
             <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Customer_Onboarded__c</picklist>
+        <values>
+            <fullName>Not onboarded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Onboarding completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Onboarding in progress</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -1559,8 +1638,7 @@
             <default>false</default>
         </values>
     </picklistValues>
- 
-        <picklistValues>
+    <picklistValues>
         <picklist>Export_Control_Status__c</picklist>
         <values>
             <fullName>Clean</fullName>
@@ -1594,8 +1672,7 @@
             <default>false</default>
         </values>
     </picklistValues>
-    
-        <picklistValues>
+    <picklistValues>
         <picklist>Geo__c</picklist>
         <values>
             <fullName>AMER</fullName>
@@ -2776,6 +2853,33 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Legal_Compliance_Status__c</picklist>
+        <values>
+            <fullName>Clean</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Excepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Restricted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suspect</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>License_Agreement_Status__c</picklist>
         <values>
             <fullName>External%2C provided</fullName>
@@ -3052,6 +3156,17 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Premium_with_SLA__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Primary_Subsidiary__c</picklist>
         <values>
             <fullName>MagnaView BV</fullName>
@@ -3166,7 +3281,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>BFS</fullName>
+            <fullName>BFSI</fullName>
             <default>false</default>
         </values>
         <values>
@@ -3202,7 +3317,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>GOV</fullName>
+            <fullName>Gov %2F Fed</fullName>
             <default>false</default>
         </values>
         <values>
@@ -3254,6 +3369,14 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>New England</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New York</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Nordics</fullName>
             <default>false</default>
         </values>
@@ -3262,19 +3385,27 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>NorthCentral</fullName>
+            <fullName>NorthCentral East</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>NorthEast</fullName>
+            <fullName>NorthCentral West</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>NorthWest</fullName>
+            <fullName>Northern California</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northern Mid-Atlantic</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pacific Northwest</fullName>
             <default>false</default>
         </values>
         <values>
@@ -3319,6 +3450,21 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Regional_Business_Partner_Type__c</picklist>
+        <values>
+            <fullName>GSI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>National Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RSI</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Regions_in_scope__c</picklist>
         <values>
             <fullName>APAC</fullName>
@@ -3346,6 +3492,25 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Resale_Discount_Tier__c</picklist>
+        <values>
+            <fullName>0%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>35%25</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Revenue_Source__c</picklist>
         <values>
             <fullName>Company Website</fullName>
@@ -3368,8 +3533,7 @@
             <default>false</default>
         </values>
     </picklistValues>
-  
-        <picklistValues>
+    <picklistValues>
         <picklist>Segmentation__c</picklist>
         <values>
             <fullName>CSM Pool</fullName>
@@ -5040,8 +5204,7 @@
             <default>false</default>
         </values>
     </picklistValues>
-   
-        <picklistValues>
+    <picklistValues>
         <picklist>Type</picklist>
         <values>
             <fullName>Prospect</fullName>
@@ -5162,5 +5325,4 @@
             <default>false</default>
         </values>
     </picklistValues>
-  
-    </RecordType>
+</RecordType>

@@ -5,13 +5,16 @@ public class CaseCustomerReplyActionFunction implements SObjectToSObjectFunction
   }
 
   public SObject apply(Case record) {
-    record.CheckCustomerFirstResponse__c = true;
-    record.Status = 'In Process';
+    Case existingRecord = (Case) existingRecords.get(record.Id);
+    if (record.Status != 'New' && existingRecord.Status != 'Closed') {
+      record.CheckCustomerFirstResponse__c = true;
+      record.Status = 'In Process';
+    }
     if (
       record.RecordTypeId == CaseMetadata.AcademyRecordType ||
       record.RecordTypeId == CaseMetadata.SalesOperationRecordType
     ) {
-      record.NoOfReceived_Prior_value__c = ((Case) existingRecords.get(record.Id)).No_of_Emails_Received__c;
+      record.NoOfReceived_Prior_value__c = existingRecord.No_of_Emails_Received__c;
     }
     return record;
   }

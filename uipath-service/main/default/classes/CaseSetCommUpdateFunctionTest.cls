@@ -9,14 +9,16 @@ public class CaseSetCommUpdateFunctionTest {
       Subject = 'Test',
       RecordTypeId = incidentRecordTypeID,
       Status = 'New',
-      No_of_Emails_Sent__c = 2
+      No_of_Emails_Sent__c = 2,
+      Comm_Update__c = false
     );
     Case updatedCase = new Case(
       Id = caseId,
       Subject = 'Test',
       RecordTypeId = incidentRecordTypeID,
       Status = 'Closed',
-      No_of_Emails_Sent__c = 3
+      No_of_Emails_Sent__c = 3,
+      Comm_Update__c = false
     );
     fflib_SObjectDomain.Test.Database.onUpdate(
       new List<Case>{ updatedCase },

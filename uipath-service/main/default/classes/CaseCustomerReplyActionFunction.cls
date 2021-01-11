@@ -45,8 +45,6 @@ public class CaseCustomerReplyActionFunction implements SObjectToSObjectFunction
               CaseMetadata.SalesOperationRecordType
             }
           )
-          .also(Case.No_of_Emails_Received__c)
-          .greaterThanOrEquals(1)
       )
       .mapAll(new CaseCustomerReplyActionFunction(Records, existingRecords));
   }

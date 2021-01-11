@@ -1,7 +1,7 @@
 @isTest
 public with sharing class CaseCustomerReplyActionFunctionTest {
   @IsTest
-  private static void caseCustomerReplyActionFunction_deriveCustomerFirstResponse() {
+  private static void onUpdate_deriveCustomerFirstResponse() {
     Id caseId = fflib_IDGenerator.generate(Case.SObjectType);
     Id academyId = CaseMetadata.AcademyRecordType;
     Case oldCase = new Case(

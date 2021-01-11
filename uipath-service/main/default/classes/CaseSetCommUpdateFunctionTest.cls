@@ -16,7 +16,7 @@ public class CaseSetCommUpdateFunctionTest {
       Id = caseId,
       Subject = 'Test',
       RecordTypeId = incidentRecordTypeID,
-      Status = 'Closed',
+      Status = 'In Process',
       No_of_Emails_Sent__c = 3,
       Comm_Update__c = false
     );

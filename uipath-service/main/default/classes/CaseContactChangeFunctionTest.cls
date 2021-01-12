@@ -1,3 +1,4 @@
+@IsTest
 public class CaseContactChangeFunctionTest {
   @TestSetup
   static void makeData() {

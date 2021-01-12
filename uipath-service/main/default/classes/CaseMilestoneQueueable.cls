@@ -66,7 +66,7 @@ public without sharing class CaseMilestoneQueueable {
     if (!eligibleCases.isEmpty()) {
       if (!isAlreadyRun) {
         //AbstractQueueable.enqueue(new CaseMilestoneQueueable(eligibleCases, System.now()));
-        List<Id> recordIds = Collection.of(cases).pluckIds();
+        List<Id> recordIds = Collection.of(eligibleCases).pluckIds();
         updateMilestones(new Set<Id>(recordIds));
         isAlreadyRun = true;
       }

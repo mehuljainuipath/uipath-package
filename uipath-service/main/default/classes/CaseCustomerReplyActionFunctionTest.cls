@@ -15,7 +15,7 @@ public with sharing class CaseCustomerReplyActionFunctionTest {
       Id = caseId,
       Subject = 'Test',
       RecordTypeId = academyId,
-      Status = 'New',
+      Status = 'Customer Action',
       No_of_Emails_Received__c = 1
     );
     fflib_SObjectDomain.Test.Database.onUpdate(

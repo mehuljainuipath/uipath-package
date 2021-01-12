@@ -5,7 +5,7 @@
  * Needs to be rewritten entirely
  * Updates the Completion date on CaseMilestone for Comm Update cases
  */
-public without sharing class CaseMilestoneQueueable extends AbstractQueueable{
+public without sharing class CaseMilestoneQueueable extends AbstractQueueable {
   private final List<Case> records;
   private final Datetime currentDate;
   private static Boolean isAlreadyRun = false;

@@ -47,6 +47,7 @@ public with sharing class Cases extends fflib_SObjectDomain implements ICases {
     CaseSetCommUpdateFunction.deriveCommUpdate(Records, existingRecords);
     CaseSetTTETimeStampFunction.deriveTTETimeStamp(Records);
     CaseCustomerReplyActionFunction.deriveCustomerFirstResponse(Records, existingRecords);
+    CaseContactChangeFunction.deriveAccountBasedOnContact(Records, existingRecords);
   }
 
   public override void onAfterInsert() {

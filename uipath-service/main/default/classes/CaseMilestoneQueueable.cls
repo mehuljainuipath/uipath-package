@@ -5,12 +5,23 @@
  * Needs to be rewritten entirely
  * Updates the Completion date on CaseMilestone for Comm Update cases
  */
-public without sharing class CaseMilestoneQueueable {
-  private final List<SObject> cases;
+public without sharing class CaseMilestoneQueueable extends AbstractQueueable{
+  private final List<Case> records;
   private final Datetime currentDate;
   private static Boolean isAlreadyRun = false;
 
-  private static void updateMilestones(Set<Id> caseIds) {
+  public CaseMilestoneQueueable(List<Case> records, Datetime dateNow) {
+    super('CaseMilestoneQueueable');
+    this.records = records;
+    this.currentDate = dateNow;
+  }
+
+  public override void work() {
+    List<Id> recordIds = Collection.of(this.records).pluckIds();
+    updateMilestones(new Set<Id>(recordIds), this.currentDate);
+  }
+
+  private static void updateMilestones(Set<Id> caseIds, Datetime currentDate) {
     List<CaseMilestone> milestoneList = new List<CaseMilestone>();
     for (CaseMilestone milestone : [
       SELECT Id, CompletionDate
@@ -22,7 +33,7 @@ public without sharing class CaseMilestoneQueueable {
         AND CompletionDate = null
       FOR UPDATE
     ]) {
-      milestone.CompletionDate = System.now();
+      milestone.CompletionDate = currentDate;
       milestoneList.add(milestone);
     }
     List<Case> casesToUpdate = new List<Case>();
@@ -65,9 +76,9 @@ public without sharing class CaseMilestoneQueueable {
 
     if (!eligibleCases.isEmpty()) {
       if (!isAlreadyRun) {
-        //AbstractQueueable.enqueue(new CaseMilestoneQueueable(eligibleCases, System.now()));
-        List<Id> recordIds = Collection.of(eligibleCases).pluckIds();
-        updateMilestones(new Set<Id>(recordIds));
+        AbstractQueueable.enqueue(new CaseMilestoneQueueable(eligibleCases, System.now()));
+        //List<Id> recordIds = Collection.of(cases).pluckIds();
+        //updateMilestones(new Set<Id>(recordIds));
         isAlreadyRun = true;
       }
     }

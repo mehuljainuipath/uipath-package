@@ -8,6 +8,9 @@ public class CaseEmailSentFunction implements SObjectToSObjectFunction {
   public SObject apply(Case record) {
     record.Customer_Contact__c = true;
     record.Status = 'Customer Action';
+    if (record.RecordTypeId == CaseMetadata.ServiceRequestRecordType) {
+      record.Status_Sub_Category__c = 'Awaiting Customer';
+    }
     return record;
   }
 

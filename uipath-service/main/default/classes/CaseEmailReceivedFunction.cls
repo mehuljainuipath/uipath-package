@@ -7,6 +7,9 @@ public class CaseEmailReceivedFunction implements SObjectToSObjectFunction {
 
   public SObject apply(Case record) {
     record.Customer_Contact__c = false;
+    if (record.RecordTypeId == CaseMetadata.ServiceRequestRecordType) {
+      record.Status_Sub_Category__c = '';
+    }
     return record;
   }
 

@@ -5,19 +5,23 @@
  * Needs to be rewritten entirely
  * Updates the Completion date on CaseMilestone for First Response cases
  */
-public without sharing class CaseFirstResponseQueueable {
-  private final List<SObject> cases;
+public without sharing class CaseFirstResponseQueueable extends AbstractQueueable{
+  private final List<Id> recordIds;
   private final Datetime currentTime;
   @TestVisible
   private static Boolean isAlreadyRun = false;
 
-  public CaseFirstResponseQueueable(List<SObject> cases, Datetime currentTime) {
+  public CaseFirstResponseQueueable(List<Id> recordIds, Datetime currentTime) {
     super('CaseFirstResponseQueueable');
-    this.cases = cases;
+    this.recordIds = recordIds;
     this.currentTime = currentTime;
   }
 
-  private static void updateMilestones(Set<Id> recordIds) {
+  public override void work() {
+    this.updateMilestones(this.recordIds, this.currentTime);
+  }
+
+  private void updateMilestones(List<Id> recordIds, Datetime dateNow) {
     List<CaseMilestone> milestoneList = new List<CaseMilestone>();
     for (CaseMilestone milestone : [
       SELECT Id, CompletionDate
@@ -29,7 +33,7 @@ public without sharing class CaseFirstResponseQueueable {
         AND CompletionDate = null
       FOR UPDATE
     ]) {
-      milestone.CompletionDate = System.now();
+      milestone.CompletionDate = dateNow;
       milestoneList.add(milestone);
     }
     update milestoneList;
@@ -51,7 +55,8 @@ public without sharing class CaseFirstResponseQueueable {
       if (!isAlreadyRun) {
         isAlreadyRun = true;
         List<Id> recordIds = Collection.of(cases).pluckIds();
-        updateMilestones(new Set<Id>(recordIds));
+        AbstractQueueable.enqueue(new CaseFirstResponseQueueable(recordIds, System.now()));
+        //updateMilestones(new Set<Id>(recordIds));
       }
     }
   }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Sub_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Status Sub Category</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>3 Strike Rule</fullName>
+                <default>false</default>
+                <label>3 Strike Rule</label>
+            </value>
+            <value>
+                <fullName>Awaiting Customer</fullName>
+                <default>false</default>
+                <label>Awaiting Customer</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Customer Action</controllingFieldValue>
+            <valueName>3 Strike Rule</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customer Action</controllingFieldValue>
+            <valueName>Awaiting Customer</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

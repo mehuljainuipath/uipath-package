@@ -6,9 +6,66 @@
     <compactLayoutAssignment>Case_Compact_v2</compactLayoutAssignment>
     <label>Sales Operation</label>
     <picklistValues>
+        <picklist>Awaiting_Pending_Reason__c</picklist>
+        <values>
+            <fullName>Pending from Infra%2FMCS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending from Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending from Sr%2E Tech Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending from Tech Support</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Web_Form_Region__c</picklist>
+        <values>
+            <fullName>Cloud Enterprise</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Japan</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Closure_Classification__c</picklist>
         <values>
             <fullName>Enhancement Request</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Comm_Value__c</picklist>
+        <values>
+            <fullName>Comm Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comm Running</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comm Success</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comm Violated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FR Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FR Voilated</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -499,7 +556,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Moldova Republic of</fullName>
+            <fullName>Moldova</fullName>
             <default>false</default>
         </values>
         <values>
@@ -1054,6 +1111,17 @@
         </values>
         <values>
             <fullName>Upgrades and License Migration</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_Sub_Category__c</picklist>
+        <values>
+            <fullName>3 Strike Rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Customer</fullName>
             <default>false</default>
         </values>
     </picklistValues>

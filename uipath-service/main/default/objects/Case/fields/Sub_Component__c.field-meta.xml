@@ -1350,6 +1350,76 @@
                 <label>Export to Studio</label>
             </value>
             <value>
+                <fullName>Provisioning &amp; Licensing</fullName>
+                <default>false</default>
+                <label>Provisioning &amp; Licensing</label>
+            </value>
+            <value>
+                <fullName>Entity Details &amp; Data Views</fullName>
+                <default>false</default>
+                <label>Entity Details &amp; Data Views</label>
+            </value>
+            <value>
+                <fullName>Entity Create/Edit/Delete</fullName>
+                <default>false</default>
+                <label>Entity Create/Edit/Delete</label>
+            </value>
+            <value>
+                <fullName>Field Create/Edit/Delete</fullName>
+                <default>false</default>
+                <label>Field Create/Edit/Delete</label>
+            </value>
+            <value>
+                <fullName>Studio Activities</fullName>
+                <default>false</default>
+                <label>Studio Activities</label>
+            </value>
+            <value>
+                <fullName>Activities_Workday</fullName>
+                <default>false</default>
+                <label>Activities_Workday</label>
+            </value>
+            <value>
+                <fullName>Activities_ServiceNow</fullName>
+                <default>false</default>
+                <label>Activities_ServiceNow</label>
+            </value>
+            <value>
+                <fullName>Activities_Jira</fullName>
+                <default>false</default>
+                <label>Activities_Jira</label>
+            </value>
+            <value>
+                <fullName>Activities_Box</fullName>
+                <default>false</default>
+                <label>Activities_Box</label>
+            </value>
+            <value>
+                <fullName>Activities_Alteryx</fullName>
+                <default>false</default>
+                <label>Activities_Alteryx</label>
+            </value>
+            <value>
+                <fullName>Activities_DocuSign</fullName>
+                <default>false</default>
+                <label>Activities_DocuSign</label>
+            </value>
+            <value>
+                <fullName>Activities_Marketo</fullName>
+                <default>false</default>
+                <label>Activities_Marketo</label>
+            </value>
+            <value>
+                <fullName>Activities_Smartsheet</fullName>
+                <default>false</default>
+                <label>Activities_Smartsheet</label>
+            </value>
+            <value>
+                <fullName>Druid</fullName>
+                <default>false</default>
+                <label>Druid</label>
+            </value>
+            <value>
                 <fullName>Orchestrator_Infra</fullName>
                 <default>false</default>
                 <isActive>false</isActive>
@@ -1427,6 +1497,10 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Task Capture</controllingFieldValue>
+            <valueName>PDD &amp; Templates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Task Capture</controllingFieldValue>
             <valueName>Integration with Automation Hub</valueName>
         </valueSettings>
         <valueSettings>
@@ -1455,6 +1529,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>UiPath Go</controllingFieldValue>
+            <controllingFieldValue>Process Gold</controllingFieldValue>
             <controllingFieldValue>Learning Platform Inquiries</controllingFieldValue>
             <controllingFieldValue>Licensing</controllingFieldValue>
             <valueName>NA</valueName>
@@ -1474,6 +1549,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Process Gold</controllingFieldValue>
+            <controllingFieldValue>Data Service</controllingFieldValue>
             <valueName>User Management</valueName>
         </valueSettings>
         <valueSettings>
@@ -1873,6 +1949,26 @@
             <valueName>Automation Ready Youth</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Data Service</controllingFieldValue>
+            <valueName>Provisioning &amp; Licensing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Data Service</controllingFieldValue>
+            <valueName>Entity Details &amp; Data Views</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Data Service</controllingFieldValue>
+            <valueName>Entity Create/Edit/Delete</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Data Service</controllingFieldValue>
+            <valueName>Field Create/Edit/Delete</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Data Service</controllingFieldValue>
+            <valueName>Studio Activities</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Partner Training</controllingFieldValue>
             <valueName>Partner Training Inquiry</valueName>
         </valueSettings>
@@ -2079,6 +2175,46 @@
         <valueSettings>
             <controllingFieldValue>Studio</controllingFieldValue>
             <valueName>Validation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Workday</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_ServiceNow</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Jira</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Box</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Alteryx</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_DocuSign</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Marketo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Studio</controllingFieldValue>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Activities_Smartsheet</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Orchestrator</controllingFieldValue>
@@ -2349,6 +2485,10 @@
         <valueSettings>
             <controllingFieldValue>Partner Product</controllingFieldValue>
             <valueName>Salesforce connector</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Partner Product</controllingFieldValue>
+            <valueName>Druid</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Feedback</controllingFieldValue>

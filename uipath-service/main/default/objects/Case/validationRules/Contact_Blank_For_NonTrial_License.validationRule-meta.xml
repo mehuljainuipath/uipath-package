@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Blank_For_NonTrial_License</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(OR(RecordType.Name == &#39;Service Request&#39;,RecordType.Name == &#39;Sales Operation&#39;,RecordType.Name == &#39;Academy&#39;),AND(NOT(ISPICKVAL(Subscription_Code__c,&#39;TRIAL&#39;)),NOT(Is_Free_Mailer__c)),OR(ISBLANK(ContactId),ISNULL(ContactId)) )</errorConditionFormula>
+    <errorDisplayField>ContactId</errorDisplayField>
+    <errorMessage>Contact Name is required</errorMessage>
+</ValidationRule>

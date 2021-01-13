@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>check_PReason_is_select_when_staus_pend</fullName>
+    <active>true</active>
+    <description>Validate that When status is Pending there should be a need to select Awaiting/Pending
+Reason</description>
+    <errorConditionFormula>IsPICKVAL(Status,&quot;Pending from Engineering&quot;) &amp;&amp; IsPICKVAL( Awaiting_Pending_Reason__c ,&quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>Awaiting_Pending_Reason__c</errorDisplayField>
+    <errorMessage>Please select any of the Awaiting/Pending Reason</errorMessage>
+</ValidationRule>

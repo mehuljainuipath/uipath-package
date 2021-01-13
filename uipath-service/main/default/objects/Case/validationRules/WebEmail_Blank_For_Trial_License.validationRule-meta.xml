@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WebEmail_Blank_For_Trial_License</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(OR(RecordType.Name == &#39;Service Request&#39;,RecordType.Name == &#39;Sales Operation&#39;),ISPICKVAL(Subscription_Code__c,&#39;TRIAL&#39;),OR(ISBLANK(SuppliedEmail ),ISNULL(SuppliedEmail )) )</errorConditionFormula>
+    <errorDisplayField>SuppliedEmail</errorDisplayField>
+    <errorMessage>Web Email is required</errorMessage>
+</ValidationRule>

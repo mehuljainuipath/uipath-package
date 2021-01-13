@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ResolutationFromL2IsRequiredonER</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(OR(RecordType.Name=&quot;Engagement Request&quot;,RecordType.Name=&quot;Japan Engagement Request&quot;),
+OR(ISPICKVAL(Status,&quot;Closed&quot;),ISPICKVAL(Status,&quot;Resolved&quot;)),
+LEN(Resolution_from_L2__c )=0)</errorConditionFormula>
+    <errorDisplayField>Resolution_from_L2__c</errorDisplayField>
+    <errorMessage>Resolution Field Is Mandatory Before Closing/Resolving ER.</errorMessage>
+</ValidationRule>

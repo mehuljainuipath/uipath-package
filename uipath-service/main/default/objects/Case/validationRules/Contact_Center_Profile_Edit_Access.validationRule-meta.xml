@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Center_Profile_Edit_Access</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(OR(
+    ISCHANGED(AccountId),
+    ISCHANGED(RecordTypeId),
+    ISCHANGED(Origin),
+    ISCHANGED(Reason),
+    ISCHANGED(Priority),
+    ISCHANGED(Status),
+    ISCHANGED(ContactId),
+    ISCHANGED(End_Customer_s_Name__c),
+    ISCHANGED(Requester_s_Company_Name__c),
+    ISCHANGED(Subject),
+    ISCHANGED(Description),
+    ISCHANGED(Error_Message__c),
+    ISCHANGED(Continue_with_Unassigned_Account__c),
+    ISCHANGED(Resolution_Summary__c),
+    ISCHANGED(Related_To__c),
+    ISCHANGED(Sub_Component__c),
+    ISCHANGED(Environment_Of_Issue__c),
+    ISCHANGED(No_Of_Robots_Impacted_By_Issue__c),
+    ISCHANGED(Studio_Version__c),
+    ISCHANGED(Licence_Key__c),    
+    ISCHANGED(License_Code__c),
+    ISCHANGED(License_Category__c),
+    ISCHANGED(Issue_Category__c),
+    ISCHANGED(Orchestrator_Version__c),
+    ISCHANGED(What_is_your_request_related_to__c),
+    ISCHANGED(Device_Id__c),
+    ISCHANGED(Steps_To_Reproduce_The_Issue__c),
+    ISCHANGED(Expected_Result__c),
+    ISCHANGED(Actual_Result__c),
+    ISCHANGED(Frequency__c),
+    ISCHANGED(Workaround__c),
+    ISCHANGED(What_You_Want_Us_To_Do__c),
+    ISCHANGED(Issue__c),
+    ISCHANGED(Expectation_from_L2__c),
+    ISCHANGED(Copy_From_Parent_Case__c)
+),
+(Owner:User.Id &lt;&gt;  $User.Id ), CONTAINS($User.ProfileId, $Label.Contact_Centre_Support_Profile_ID ))</errorConditionFormula>
+    <errorMessage>You are not the owner of this case. You may not edit this record.</errorMessage>
+</ValidationRule>

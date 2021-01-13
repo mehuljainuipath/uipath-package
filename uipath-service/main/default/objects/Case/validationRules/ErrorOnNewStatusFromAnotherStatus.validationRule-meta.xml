@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ErrorOnNewStatusFromAnotherStatus</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(!ISNEW(),NOT(ISPICKVAL(PRIORVALUE( Status),&quot;New&quot;)),OR(
+          $RecordType.Name = &quot;Service Request&quot;, 
+          $RecordType.Name = &quot;Service Incident&quot;,
+$RecordType.Name = &quot;Incident&quot;,$RecordType.Name = &quot;Japan Incident&quot;,
+$RecordType.Name = &quot;Japan Incident&quot;,
+$RecordType.Name = &quot;Japan Academy&quot;,
+$RecordType.Name = &quot;Japan Licensing&quot;,
+$RecordType.Name = &quot;Academy&quot;,
+$RecordType.Name = &quot;Sales Operation&quot;),ISPICKVAL(Status,&quot;New&quot;))</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Status cannot be changed to New.</errorMessage>
+</ValidationRule>

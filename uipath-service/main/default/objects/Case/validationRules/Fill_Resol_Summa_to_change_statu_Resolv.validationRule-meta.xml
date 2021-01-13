@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fill_Resol_Summa_to_change_statu_Resolv</fullName>
+    <active>true</active>
+    <description>Fill Solution to change the status to resolved in Incident record type</description>
+    <errorConditionFormula>AND(OR( RecordType.DeveloperName =&quot;Service_Request&quot;,
+RecordType.DeveloperName=&quot;Incident&quot;,
+RecordType.DeveloperName=&quot;Japan_Academy&quot;,
+RecordType.DeveloperName=&quot;Japan_Licensing&quot;,
+RecordType.DeveloperName=&quot;Japan_Incident&quot;),
+$Profile.Name &lt;&gt; &quot;Sales Operations Japan&quot;,
+OR(ISPICKVAL(Status,&quot;Resolved&quot;),ISPICKVAL(Status,&quot;Closed&quot;)),
+LEN(Solution__c)=0,ISBLANK(Primary_Case_lookup__c ))</errorConditionFormula>
+    <errorMessage>Please fill Solution in Living summary</errorMessage>
+</ValidationRule>

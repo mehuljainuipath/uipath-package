@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Account_Name_is_UnassignedAccount</fullName>
+    <active>true</active>
+    <description>Check Account Name is UnassignedAccount if case staus is closed</description>
+    <errorConditionFormula>AND(OR(RecordType.DeveloperName=&quot;Service_Request&quot;,
+RecordType.DeveloperName=&quot;Service_Incident&quot;,
+RecordType.DeveloperName=&quot;Japan_Academy&quot;,
+RecordType.DeveloperName=&quot;Japan_Licensing&quot;,
+RecordType.DeveloperName=&quot;Japan_Incident&quot;,
+RecordType.DeveloperName=&quot;Engagement_Request&quot;,
+RecordType.DeveloperName=&quot;Japan_Engagement_Request&quot;,
+RecordType.DeveloperName=&quot;Sales_Operation&quot;),
+ISPICKVAL(Status,&quot;Closed&quot;),AccountId = $Label.Dummy_Account,
+ ISBLANK(Primary_Case_lookup__c)
+ )</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>This case is currently linked to &quot;Unassigned Account&quot;. Change it to Original Account</errorMessage>
+</ValidationRule>

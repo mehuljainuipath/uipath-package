@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Child_Cases_Record_Type_Restriction</fullName>
+    <active>true</active>
+    <description>Restricts the record type of child</description>
+    <errorConditionFormula>RecordType.Name &lt;&gt; &#39;Expert Request&#39; &amp;&amp; RecordType.Name &lt;&gt; &#39;Japan Engagement Request&#39; &amp;&amp;
+RecordType.Name &lt;&gt; &#39;Incident&#39; &amp;&amp;
+NOT(ISNULL(ParentId)) &amp;&amp;
+(Parent.RecordType.Name=&#39;Service Incident&#39; ||
+Parent.RecordType.Name=&#39;Incident&#39; ||
+Parent.RecordType.Name=&#39;Service Request&#39;)</errorConditionFormula>
+    <errorDisplayField>no_of_times_service_has_been_delivered__c</errorDisplayField>
+    <errorMessage>Child case record type can either be Engagement Request or Incident.</errorMessage>
+</ValidationRule>

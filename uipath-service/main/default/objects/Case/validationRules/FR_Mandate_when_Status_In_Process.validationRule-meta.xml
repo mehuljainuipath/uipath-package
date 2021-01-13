@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FR_Mandate_when_Status_In_Process</fullName>
+    <active>true</active>
+    <errorConditionFormula>(RecordType.Name=&#39;Engagement Request&#39; ||RecordType.Name= &#39;Japan Engagement Request&#39;)&amp;&amp;ISPICKVAL(Status,&#39;In Process&#39;)&amp;&amp;(ISNULL(First_Response__c)||ISBLANK(First_Response__c))</errorConditionFormula>
+    <errorDisplayField>First_Response__c</errorDisplayField>
+    <errorMessage>Please provide First Response message for L1 team.</errorMessage>
+</ValidationRule>

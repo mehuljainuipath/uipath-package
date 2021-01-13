@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transition_Case_Living_Summary_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>$RecordType.Name = &quot;Incident&quot; &amp;&amp;
+  Solution__c ==&quot;&quot; &amp;&amp;
+   Problem__c  == &quot;&quot; &amp;&amp;
+    !ISPICKVAL( Transition__c , &quot;&quot;)</errorConditionFormula>
+    <errorMessage>Please fill in Living summary to transition the case.</errorMessage>
+</ValidationRule>

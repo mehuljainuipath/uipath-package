@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductComponent_Required_toCloseCase</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(OR(RecordType.DeveloperName=&quot;Service_Request&quot;,
+RecordType.DeveloperName=&quot;Service_Incident&quot;,
+RecordType.DeveloperName=&quot;Incident&quot;,
+RecordType.DeveloperName=&quot;Japan_Academy&quot;,
+RecordType.DeveloperName=&quot;Japan_Licensing&quot;,
+RecordType.DeveloperName=&quot;Japan_Incident&quot;,
+RecordType.DeveloperName=&quot;Engagement_Request&quot;,
+RecordType.DeveloperName=&quot;Japan_Engagement_Request&quot;),
+OR( ISPICKVAL(Status,&quot;Resolved&quot;),ISPICKVAL(Status,&quot;Closed&quot;)),  ISPICKVAL(Related_To__c,&#39;&#39;),ISBLANK(Primary_Case_lookup__c),
+Is_Batch_Running__c = FALSE)</errorConditionFormula>
+    <errorDisplayField>Related_To__c</errorDisplayField>
+    <errorMessage>Please Select Product Component.</errorMessage>
+</ValidationRule>

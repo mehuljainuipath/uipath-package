@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ClosureClassification_Status_is_Closed</fullName>
+    <active>true</active>
+    <description>Closure Classification when status is closed</description>
+    <errorConditionFormula>AND(OR( ISPICKVAL( Status , &#39;Closed&#39;),ISPICKVAL( Status , &#39;Resolved&#39;)), 
+ISBLANK(TEXT( Closure_Classification__c )),
+OR($RecordType.DeveloperName = &quot;Incident&quot;,$RecordType.DeveloperName = &quot;Service_Request&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Closure_Classification__c</errorDisplayField>
+    <errorMessage>Closure Classification needs to be filled before Resolving/Closing</errorMessage>
+</ValidationRule>

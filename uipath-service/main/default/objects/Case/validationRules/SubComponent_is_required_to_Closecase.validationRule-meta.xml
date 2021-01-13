@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SubComponent_is_required_to_Closecase</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OR(RecordType.DeveloperName=&quot;Service_Request&quot;, 
+RecordType.DeveloperName=&quot;Service_Incident&quot;, 
+RecordType.DeveloperName=&quot;Incident&quot;, 
+RecordType.DeveloperName=&quot;Japan_Academy&quot;, 
+RecordType.DeveloperName=&quot;Japan_Licensing&quot;, 
+RecordType.DeveloperName=&quot;Japan_Incident&quot;, 
+RecordType.DeveloperName=&quot;Engagement_Request&quot;, 
+RecordType.DeveloperName=&quot;Japan_Engagement_Request&quot;), 
+OR(
+ISPICKVAL(Status,&quot;Resolved&quot;),
+ISPICKVAL(Status,&quot;Closed&quot;)
+), 
+NOT(ISPICKVAL( Related_To__c ,&quot;Portal&quot;)), 
+IF(ISPICKVAL(Related_To__c,&quot;Cloud Platform&quot;),IF(ISPICKVAL(CP_Subcomponent__c,&#39;&#39;),true,false),IF(ISPICKVAL(Sub_Component__c, &#39;&#39;),true,false)),
+IF(ISPICKVAL(Related_To__c,&quot;Connect Enterprise&quot;),IF(ISPICKVAL(Connect_Enterprise_Sub_Component__c,&#39;&#39;),true,false),IF(ISPICKVAL(Sub_Component__c, &#39;&#39;),true,false)), 
+ISBlank(Primary_Case_lookup__c), 
+Is_Batch_Running__c = FALSE)</errorConditionFormula>
+    <errorDisplayField>Sub_Component__c</errorDisplayField>
+    <errorMessage>Please select Sub Component</errorMessage>
+</ValidationRule>

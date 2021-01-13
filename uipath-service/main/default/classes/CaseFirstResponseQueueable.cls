@@ -12,6 +12,7 @@ public without sharing class CaseFirstResponseQueueable {
   private static Boolean isAlreadyRun = false;
 
   public CaseFirstResponseQueueable(List<SObject> cases, Datetime currentTime) {
+    super('CaseFirstResponseQueueable');
     this.cases = cases;
     this.currentTime = currentTime;
   }

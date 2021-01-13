@@ -5,7 +5,7 @@
  * Needs to be rewritten entirely
  * Updates the Completion date on CaseMilestone for First Response cases
  */
-public without sharing class CaseFirstResponseQueueable extends AbstractQueueable{
+public without sharing class CaseFirstResponseQueueable extends AbstractQueueable {
   private final List<Id> recordIds;
   private final Datetime currentTime;
   @TestVisible

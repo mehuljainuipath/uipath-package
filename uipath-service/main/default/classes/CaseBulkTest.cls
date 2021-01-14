@@ -142,12 +142,11 @@ public class CaseBulkTest {
     for (Integer i = 0; i < 200; i++) {
       cases.get(i).Status = 'Resolved';
       cases.get(i).No_of_Emails_Received__c = 2;
-      cases.get(i).No_of_Emails_Sent__c = 2;
+      cases.get(i).No_of_Emails_Sent__c = 1;
       cases.get(i).Priority = 'High';
       cases.get(i).Awaiting_Pending_Reason__c = CaseMetadata.PENDING_FROM_PRODUCT;
       cases.get(i).Copy_From_Parent_Case__c = true;
       cases.get(i).OwnerId = usr.Id;
-      cases.get(i).Status_Sub_Category__c = '';
     }
     //will throw on any limits issues
     List<Database.SaveResult> results = Database.update(cases, true);
@@ -186,12 +185,11 @@ public class CaseBulkTest {
     for (Integer i = 0; i < 200; i++) {
       cases.get(i).Status = 'Closed';
       cases.get(i).No_of_Emails_Received__c = 2;
-      cases.get(i).No_of_Emails_Sent__c = 2;
+      cases.get(i).No_of_Emails_Sent__c = 1;
       cases.get(i).Priority = 'High';
       cases.get(i).Awaiting_Pending_Reason__c = CaseMetadata.PENDING_FROM_PRODUCT;
       cases.get(i).Copy_From_Parent_Case__c = true;
       cases.get(i).OwnerId = usr.Id;
-      cases.get(i).Status_Sub_Category__c = '';
     }
     //will throw on any limits issues
     List<Database.SaveResult> results = Database.update(cases, true);
